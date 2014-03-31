@@ -1,0 +1,18 @@
+3.0.0
+- The app is now open source and free: https://github.com/JohnNPhillips/HistoryCleanerPro
+- Many under-the-hood changes
+- Added Lightning Browser
+
+2.4.5
+- App can now be moved to SD card
+
+2.4.1-2.4.4
+- Bug fixes
+
+2.4.0
+- Added Google Calendar (search history)
+- Added Gmail (search history)
+- Added frequent contacts
+- Minor changes and bug fixes
+
+Email ayros@email.com if you have an issues, I am here to help.

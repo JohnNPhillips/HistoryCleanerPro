@@ -1,0 +1,50 @@
+﻿** NOTE: Root Required **
+If you do not have root, or you do not know what root is, this app will not work for you.
+
+History Cleaner Pro is the most powerful history and cache cleaning tool for Androids, and the only one designed for rooted phones. It uses root access to clear the data of countless apps such as Firefox, Chrome, Dolphin Browser, and YouTube (see below for a full list). This is unlike every other history cleaning app which can only clear what Android normally allows (call history, clipboard, google play searches, etc). History Cleaner Pro clears history, caches, residual files, and more in order to free up space and memory, protect your privacy, and keep your phone running snappy and bloat free.
+
+In addition to being powerful, it is also easy to use. To simply clear a few items, just check them and press the button to do so. If there are a few items you want to clear frequently, you have the option to create shortcuts on your homescreen that can clear customizable lists of items in just one click. For advanced users who want total control, there is even Tasker support for virtually endless customization.
+
+Unsure of whether History Cleaner Pro is for you? Just download and try it out risk free for a week. We offer an extended seven day, no questions asked, return policy. Just send us an email and we'll have your money refunded within 24 hours.
+
+Features:
+★ Clears over 35 different items with new ones continually added
+★ View data to be cleared (supported by most, but not all items)
+★ Profile support for saving lists of selected items
+★ Homescreen shortcuts for one-click clearing
+★ Tasker support for virtually unlimited customization
+
+Supported Items:
+★ All Application Caches
+★ Default Android Browser (History)
+★ Clipboard
+★ Frequent Contacts
+★ Google Play (Search History)
+★ Call History
+★ Adobe Reader (Recently Viewed)
+★ Amazon (Viewed Products)
+★ Chrome (Cache, Cookies, History)
+★ Dictionary.com (Word History)
+★ Dolphin Browser (Cache, Cookies, Downloads, History, Local Storage, Open Tabs)
+★ Dolphin Browser Mini (Cache, Cookies, History, Local Storage)
+★ eBay (Search History)
+★ Firefox (Cache, Cookies, History)
+★ Gmail (Search History)
+★ Google Calendar (Search History)
+★ IMDb (History, Search Suggestions)
+★ Lightning Browser (Cache, Cookies, History, Local Storage)
+★ Maxthon Browser (Cache, Cookies, History)
+★ Merriam-Webster (Recent Words)
+★ ONE Browser(Cache, Cookies, History, Local Storage)
+★ Wikipedia – Official (History)
+★ Yelp (Searches, Viewed Places)
+★ Youtube (Searches)
+★ …and more are always being added!
+
+Also, History Cleaner Pro is open source and released under the simplified BSD license. The source code and more information can be found here: https://github.com/JohnNPhillips/HistoryCleanerPro
+
+Contact: ayros@email.com or http://www.ayros.com/contact/
+
+Please do not use reviews to suggest features, inform me of issues or bugs, or anything that requires a response from me as I cannot reply to them. Instead, use the above email address or contact form link so I can get back to you.
+
+Also, please contact me before leaving bad reviews as I will try my best to help you through any problems or issues that may arise. Also, I strongly encourage you to contact me with any feedback, (constructive) criticism, or feature requests.

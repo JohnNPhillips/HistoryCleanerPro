@@ -16,7 +16,7 @@ public class RootHelper
 	{
 		Logger.debug("Run&Wait: " + cmd);
 		
-		CommandCapture cc = new CommandCapture(0, cmd);
+		CommandCapture cc = new CommandCapture(0, false, cmd);
 
 		try
 		{

@@ -9,8 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.stericson.RootTools.RootTools;
-import com.stericson.RootTools.execution.CommandCapture;
-import com.stericson.RootTools.execution.Shell;
 
 public class DatabaseModifier
 {
@@ -48,11 +46,7 @@ public class DatabaseModifier
 			{
 				RootTools.copyFile(path + s, tempFile + s, false, true);
 
-				try
-				{
-					Shell.runRootCommand(new CommandCapture(0, "chmod 777 " + tempFile + s));
-				}
-				catch (Exception e)
+				if (RootHelper.runAndWait("chmod 777 " + tempFile + s) == null)
 				{
 					Logger.errorST("Could not chmod database file " + tempFile + s);
 					return false;
@@ -184,11 +178,7 @@ public class DatabaseModifier
 				}
 
 				// Overwrite the files with cat to preserve file ownership
-				try
-				{
-					Shell.runRootCommand(new CommandCapture(0, "cat " + tempFile + s + " > " + path + s));
-				}
-				catch (Exception e)
+				if (RootHelper.runAndWait("cat " + tempFile + s + " > " + path + s) == null)
 				{
 					Logger.errorST("Error: Could not pipe modified database back to original location");
 					return false;

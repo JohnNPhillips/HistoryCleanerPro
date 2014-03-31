@@ -6,8 +6,8 @@ import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.DBHelper;
+import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
-import com.stericson.RootTools.RootTools;
 
 public class _Firefox_History extends CleanItem
 {
@@ -15,39 +15,47 @@ public class _Firefox_History extends CleanItem
 	{
 		super(parent);
 	}
-	
+
 	@Override
 	public String getDisplayName()
 	{
 		return "History";
 	}
-	
+
 	@Override
 	public String getPackageName()
 	{
 		return "org.mozilla.firefox";
 	}
-	
+
 	public static String getFirefoxDataPath()
 	{
 		String profiles = RootHelper.getFileContents("/data/data/org.mozilla.firefox/files/mozilla/profiles.ini");
+		if (profiles == null)
+		{
+			Logger.error("Could not read the FireFox profiles.ini");
+			return null;
+		}
+
 		String[] lines = profiles.split("\n");
 		for (String line : lines)
 		{
 			if (line.contains("Path="))
 			{
 				String folder = "/data/data/org.mozilla.firefox/files/mozilla/" + line.replace("Path=", "");
-				if (RootTools.exists(folder))
+				if (RootHelper.fileOrFolderExists(folder))
 				{
 					return folder;
 				}
 				else
 				{
+					Logger.error("Found FireFox data path, but it doesn't seem to exist: " + folder);
 					return null;
 				}
 			}
 		}
-		
+
+		Logger.error("Could not find path variable in FireFox profiles.ini");
 		return null;
 	}
 	
@@ -57,6 +65,7 @@ public class _Firefox_History extends CleanItem
 		String path = getFirefoxDataPath();
 		if (path == null)
 		{
+			Logger.error("Could not get FireFox data path to view history");
 			return null;
 		}
 
@@ -77,6 +86,7 @@ public class _Firefox_History extends CleanItem
 		String path = getFirefoxDataPath();
 		if (path == null)
 		{
+			Logger.error("Could not get FireFox data path to clear history");
 			return false;
 		}
 

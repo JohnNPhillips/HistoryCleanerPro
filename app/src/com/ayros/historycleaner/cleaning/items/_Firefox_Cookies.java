@@ -6,6 +6,7 @@ import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.DBHelper;
+import com.ayros.historycleaner.helpers.Logger;
 
 public class _Firefox_Cookies extends CleanItem
 {
@@ -32,6 +33,7 @@ public class _Firefox_Cookies extends CleanItem
 		String path = _Firefox_History.getFirefoxDataPath();
 		if (path == null)
 		{
+			Logger.error("Could not get FireFox data path to view cookies");
 			return null;
 		}
 
@@ -52,6 +54,7 @@ public class _Firefox_Cookies extends CleanItem
 		String path = _Firefox_History.getFirefoxDataPath();
 		if (path == null)
 		{
+			Logger.error("Could not get FireFox data path to clear cookies");
 			return false;
 		}
 

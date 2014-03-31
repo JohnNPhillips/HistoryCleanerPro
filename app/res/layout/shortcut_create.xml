@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android1:id="@+id/shortcut_create_txtSelected"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:text=""
+        android1:layout_margin="15dp"
+        android1:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ListView
+        android1:id="@+id/shortcut_create_lstProfiles"
+        android1:layout_width="match_parent"
+        android1:layout_height="0dp"
+        android1:layout_weight="1" >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/shortcut_create_btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/shortcut_create_btnOk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@android:string/ok" />
+    </LinearLayout>
+
+</LinearLayout>

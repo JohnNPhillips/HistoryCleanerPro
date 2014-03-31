@@ -1,3 +1,6 @@
+3.0.1
+- Numerous bug fixes
+
 3.0.0
 - The app is now open source and free: https://github.com/JohnNPhillips/HistoryCleanerPro
 - Send me an email at ayros@email.com if you have paid money for this app in the past two weeks for a refund

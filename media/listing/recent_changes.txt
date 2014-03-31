@@ -1,5 +1,6 @@
 3.0.0
 - The app is now open source and free: https://github.com/JohnNPhillips/HistoryCleanerPro
+- Send me an email at ayros@email.com if you have paid money for this app in the past two weeks for a refund
 - Many under-the-hood changes
 - Added Lightning Browser
 
@@ -8,11 +9,5 @@
 
 2.4.1-2.4.4
 - Bug fixes
-
-2.4.0
-- Added Google Calendar (search history)
-- Added Gmail (search history)
-- Added frequent contacts
-- Minor changes and bug fixes
 
 Email ayros@email.com if you have an issues, I am here to help.

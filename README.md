@@ -6,7 +6,9 @@ History Cleaner Pro is released under the simplified BSD license. More informati
 
 ###Credits
 This software makes use of the the RootTools library (Copyright Stephen Erickson, Chris Ravenscroft, Dominik Schuermann, Adam Shanks).
+
 Github Link: https://github.com/Stericson/RootTools
+
 License:
 
     /*

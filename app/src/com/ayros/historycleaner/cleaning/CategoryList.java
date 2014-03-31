@@ -72,7 +72,9 @@ public class CategoryList
 		// ----- Chrome -----
 		// ------------------
 		cat = new Category("Chrome");
+
 		cat.addItem(new SimpleFileItem(cat, "Cache", "com.android.chrome", "/cache/*", true));
+
 		cat.addItem(new SimpleDatabaseItem
 		(
 			cat, "Cookies", "com.android.chrome", "/app_chrome/Default/Cookies",
@@ -84,6 +86,7 @@ public class CategoryList
 			),
 			new String[] { "DELETE FROM cookies;" }
 		));
+
 		cat.addItem(new SimpleDatabaseItem
 		(
 			cat, "History", "com.android.chrome", "/app_chrome/Default/History",
@@ -103,6 +106,11 @@ public class CategoryList
 				"DELETE FROM keyword_search_terms;",
 			}
 		));
+
+		cat.addItem(new SimpleFileItem(cat, "Local Storage", "com.android.chrome", "/app_chrome/Default/Local Storage/*", true));
+
+		cat.addItem(new SimpleFileItem(cat, "Open Tabs", "com.android.chrome", "/files/*", true));
+
 		cats.add(cat);
 		
 		// --------------------------

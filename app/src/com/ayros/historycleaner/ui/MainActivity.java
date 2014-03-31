@@ -11,6 +11,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
 import com.ayros.historycleaner.R;
+import com.ayros.historycleaner.helpers.Logger;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity
@@ -42,7 +43,15 @@ public class MainActivity extends TabActivity
 			@Override
 			public void onTabChanged(String tabId)
 			{
-				MainActivity.this.invalidateOptionsMenu();
+				try
+				{
+					MainActivity.this.invalidateOptionsMenu();
+				}
+				catch (NoSuchMethodError e)
+				{
+					Logger.errorST("Could not call invalidOptionsMenu method");
+					e.printStackTrace();
+				}
 			}
 		});
 	}

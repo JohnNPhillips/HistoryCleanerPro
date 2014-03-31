@@ -152,9 +152,13 @@ public class RootHelper
 
 		if (!path.contains("*") && !fileOrFolderExists(path))
 		{
+			Logger.debug("File doesn't exist - failOnNonexistant: " + failOnNonexistant);
 			return !failOnNonexistant;
 		}
 
-		return RootTools.deleteFileOrDirectory("\"" + path + "\"", false);
+		// Escape spaces
+		path = path.replace(" ", "\\ ");
+
+		return RootTools.deleteFileOrDirectory(path, false);
 	}
 }

@@ -15,7 +15,7 @@ public class RootHelper
 	public static String runAndWait(String cmd)
 	{
 		Logger.debug("Run&Wait: " + cmd);
-		
+
 		CommandCapture cc = new CommandCapture(0, false, cmd);
 
 		try
@@ -63,11 +63,14 @@ public class RootHelper
 			}
 		}
 
+		Logger.debug("Command Finished!");
 		return true;
 	}
 
 	public static boolean fileOrFolderExists(String path)
 	{
+		Logger.debug("File or folder exists: " + path);
+
 		// Remove trailing slash if it exists (for directories)
 		if (path.charAt(path.length() - 1) == '/')
 		{
@@ -77,6 +80,7 @@ public class RootHelper
 		int i = path.lastIndexOf('/');
 		if (i == -1)
 		{
+			Logger.debug("Could not find path folder (invalid filename?)");
 			return false;
 		}
 
@@ -84,13 +88,16 @@ public class RootHelper
 
 		List<String> fileList = getFilesList(parentDir);
 
-		return fileList.contains(path.substring(i + 1));
+		boolean exists = fileList.contains(path.substring(i + 1));
+		Logger.debug("Exists: " + (exists ? "true" : "false"));
+
+		return exists;
 	}
 
 	public static List<String> getFilesList(String path)
 	{
 		Logger.debug("Getting file list: " + path);
-		
+
 		String ls = runAndWait("ls " + path);
 		if (ls == null)
 		{
@@ -100,22 +107,30 @@ public class RootHelper
 
 		if (ls.equals("\n") || ls.equals(""))
 		{
+			Logger.debug("No files in directory");
 			return new ArrayList<String>();
 		}
 		else
 		{
-			return Arrays.asList(ls.split("\n"));
+			List<String> files = Arrays.asList(ls.split("\n"));
+			for (String file : files)
+			{
+				Logger.debug("Directory List: " + file);
+			}
+
+			return files;
 		}
 	}
 
 	public static String getFileContents(String path)
 	{
 		Logger.debug("Getting file contents: " + path);
-		
+
 		String tempFile = Globals.getContext().getCacheDir().getAbsolutePath() + "/_file_" + Helper.randomString(8) + ".txt";
 
 		if (!RootTools.copyFile(path, tempFile, false, true))
 		{
+			Logger.debug("Could not copy " + path + " to a temp directory for reading");
 			return null;
 		}
 
@@ -127,14 +142,14 @@ public class RootHelper
 
 		String data = Helper.getFileContents(tempFile);
 		RootTools.deleteFileOrDirectory(tempFile, false);
-		
+
 		return data;
 	}
 
 	public static boolean deleteFileOrFolder(String path, boolean failOnNonexistant)
 	{
 		Logger.debug("Deleting File: " + path);
-		
+
 		if (!path.contains("*") && !fileOrFolderExists(path))
 		{
 			return !failOnNonexistant;

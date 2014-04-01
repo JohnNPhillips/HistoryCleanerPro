@@ -4,6 +4,7 @@ import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
+import com.stericson.RootTools.RootTools;
 
 public class _Firefox_LocalStorage extends CleanItem
 {
@@ -32,6 +33,11 @@ public class _Firefox_LocalStorage extends CleanItem
 		{
 			Logger.error("Could not get FireFox data path to clear local storage");
 			return false;
+		}
+
+		if (!RootTools.exists(path + "/webappsstore.sqlite"))
+		{
+			return true;
 		}
 
 		return RootHelper.deleteFileOrFolder(path + "/webappsstore.sqlite*", false);

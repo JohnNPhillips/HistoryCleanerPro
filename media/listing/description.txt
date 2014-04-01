@@ -8,7 +8,7 @@ In addition to being powerful, it is also easy to use. To simply clear a few ite
 Unsure of whether History Cleaner Pro is for you? Just download and try it out risk free for a week. We offer an extended seven day, no questions asked, return policy. Just send us an email and we'll have your money refunded within 24 hours.
 
 Features:
-★ Clears over 35 different items with new ones continually added
+★ Clears over 45 different items with new ones continually added
 ★ View data to be cleared (supported by most, but not all items)
 ★ Profile support for saving lists of selected items
 ★ Homescreen shortcuts for one-click clearing
@@ -23,7 +23,7 @@ Supported Items:
 ★ Call History
 ★ Adobe Reader (Recently Viewed)
 ★ Amazon (Viewed Products)
-★ Chrome (Cache, Cookies, History)
+★ Chrome (Cache, Cookies, History, Local Storage, Open Tabs)
 ★ Dictionary.com (Word History)
 ★ Dolphin Browser (Cache, Cookies, Downloads, History, Local Storage, Open Tabs)
 ★ Dolphin Browser Mini (Cache, Cookies, History, Local Storage)

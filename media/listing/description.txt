@@ -28,7 +28,7 @@ Supported Items:
 ★ Dolphin Browser (Cache, Cookies, Downloads, History, Local Storage, Open Tabs)
 ★ Dolphin Browser Mini (Cache, Cookies, History, Local Storage)
 ★ eBay (Search History)
-★ Firefox (Cache, Cookies, History)
+★ Firefox (Cache, Cookies, History, Local Storage, Open Tabs)
 ★ Gmail (Search History)
 ★ Google Calendar (Search History)
 ★ IMDb (History, Search Suggestions)

@@ -1,3 +1,7 @@
+3.0.2
+- Added Chrome:Local Storage and Chrome:Open Tabs
+- More bug fixes
+
 3.0.1
 - Numerous bug fixes
 
@@ -7,10 +11,4 @@
 - Many under-the-hood changes
 - Added Lightning Browser
 
-2.4.5
-- App can now be moved to SD card
-
-2.4.1-2.4.4
-- Bug fixes
-
-Email ayros@email.com if you have an issues, I am here to help.
+Email ayros@email.com if you have any issues, I am here to help.

@@ -238,6 +238,7 @@ public class CategoryList
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_Cache(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_Cookies(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_History(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_LocalStorage(cat));
 		cats.add(cat);
 		
 		// -----------------

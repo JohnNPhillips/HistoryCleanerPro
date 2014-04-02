@@ -42,6 +42,7 @@ public class CategoryList
 			new String[] { "DELETE FROM suggestions;" }
 		));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_RecentCalls(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_SMS(cat));
 		cats.add(cat);
 		
 		// ------------------------

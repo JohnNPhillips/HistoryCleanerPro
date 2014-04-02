@@ -21,6 +21,7 @@ Supported Items:
 ★ Frequent Contacts
 ★ Google Play (Search History)
 ★ Call History
+★ SMS History (Jelly Bean and below)
 ★ Adobe Reader (Recently Viewed)
 ★ Amazon (Viewed Products)
 ★ Chrome (Cache, Cookies, History, Local Storage, Open Tabs)

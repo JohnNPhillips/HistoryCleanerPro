@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ayros.historycleaner"
     android:installLocation="auto"
-    android:versionCode="17"
-    android:versionName="3.0.2" >
+    android:versionCode="18"
+    android:versionName="3.0.3" >
 
     <uses-sdk
         android:minSdkVersion="8"

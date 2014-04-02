@@ -89,7 +89,7 @@ public abstract class CleanItem
 	
 	public boolean killProcess()
 	{
-		if (getPackageName() == null || getPackageName().isEmpty())
+		if (getPackageName() == null || getPackageName().length() == 0)
 		{
 			return false;
 		}

@@ -202,7 +202,11 @@ public class CleanActivity extends Activity implements OnClickListener
 				items = catList.getAllItems(false);
 				for (CleanItem ci : items)
 				{
-					ci.setChecked(true);
+					// Only check item if there is no warning message (don't accidently clean something sensitive)
+					if (ci.getWarningMessage() == null)
+					{
+						ci.setChecked(true);
+					}
 				}
 				return true;
 

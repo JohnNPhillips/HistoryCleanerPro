@@ -3,6 +3,7 @@ package com.ayros.historycleaner.ui;
 import java.io.IOException;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -157,12 +158,22 @@ public class CleanActivity extends Activity implements OnClickListener
 		menu.add(ContextMenu.NONE, id, 0, ACTION_VIEW_ITEMS);
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		getMenuInflater().inflate(R.menu.activity_clean, menu);
 
-		this.invalidateOptionsMenu();
+		try
+		{
+			this.invalidateOptionsMenu();
+		}
+		catch (NoSuchMethodError e)
+		{
+			Logger.error("Could not call invalidOptionsMenu method (CleanActivity)");
+			e.printStackTrace();
+		}
+
 		return true;
 	}
 

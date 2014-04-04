@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
@@ -40,6 +41,7 @@ public class MainActivity extends TabActivity
 
 		tabHost.setOnTabChangedListener(new OnTabChangeListener()
 		{
+			@SuppressLint("NewApi")
 			@Override
 			public void onTabChanged(String tabId)
 			{
@@ -49,7 +51,7 @@ public class MainActivity extends TabActivity
 				}
 				catch (NoSuchMethodError e)
 				{
-					Logger.errorST("Could not call invalidOptionsMenu method");
+					Logger.error("Could not call invalidOptionsMenu method (MainActivity)");
 					e.printStackTrace();
 				}
 			}

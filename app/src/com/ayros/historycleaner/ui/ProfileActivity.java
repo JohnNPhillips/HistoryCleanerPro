@@ -2,6 +2,7 @@ package com.ayros.historycleaner.ui;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -50,12 +51,22 @@ public class ProfileActivity extends Activity implements OnClickListener
 		showProfileList();
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		getMenuInflater().inflate(R.menu.activity_profile, menu);
 
-		this.invalidateOptionsMenu();
+		try
+		{
+			ProfileActivity.this.invalidateOptionsMenu();
+		}
+		catch (NoSuchMethodError e)
+		{
+			Logger.errorST("Could not call invalidOptionsMenu method (ProfileActivity)");
+			e.printStackTrace();
+		}
+
 		return true;
 	}
 

@@ -134,17 +134,31 @@ public class CleanActivity extends Activity implements OnClickListener
 			Button cleanButton = (Button)findViewById(R.id.button_clear);
 			cleanButton.setOnClickListener(this);
 
-			final Toast t = Toast.makeText(this, getTip(), Toast.LENGTH_LONG);
-			t.show();
-
-			new Handler().postDelayed(new Runnable()
+			if (Logger.isDebugMode() || Logger.isLogToFileMode())
 			{
-				@Override
-				public void run()
+				if (Logger.isDebugMode())
 				{
-					t.show();
+					Toast.makeText(this, "Debug mode is on.", Toast.LENGTH_SHORT).show();
 				}
-			}, 2000);
+				if (Logger.isLogToFileMode())
+				{
+					Toast.makeText(this, "Log-to-file mode is on.", Toast.LENGTH_SHORT).show();
+				}
+			}
+			else
+			{
+				final Toast t = Toast.makeText(this, getTip(), Toast.LENGTH_LONG);
+				t.show();
+
+				new Handler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						t.show();
+					}
+				}, 2000);
+			}
 		}
 	}
 

@@ -1,14 +1,11 @@
-3.0.3
+3.0.4
+- Fixed crash on Gingerbread devices
+
+3.0.1-3.0.3
 - Added Firefox:Local Storage and Firefox:Open Tabs
 - Added SMS history (Jelly Bean and below)
-- Bug fixes
-
-3.0.2
 - Added Chrome:Local Storage and Chrome:Open Tabs
-- More bug fixes
-
-3.0.1
-- Numerous bug fixes
+- Bug fixes
 
 3.0.0
 - The app is now open source and free

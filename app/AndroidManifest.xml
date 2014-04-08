@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ayros.historycleaner"
+    package="com.ayros.historycleaner.legacy"
     android:installLocation="auto"
-    android:versionCode="18"
-    android:versionName="3.0.3" >
+    android:versionCode="20"
+    android:versionName="4.0.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="10"
+        android:maxSdkVersion="10" />
 
     <uses-feature
         android:name="android.hardware.telephony"
@@ -30,7 +31,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.ayros.historycleaner.ui.SplashActivity"
+            android:name="com.ayros.historycleaner.legacy.ui.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,11 +40,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.ui.MainActivity"
+            android:name="com.ayros.historycleaner.legacy.ui.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.ui.CleanActivity"
+            android:name="com.ayros.historycleaner.legacy.ui.CleanActivity"
             android:label="@string/title_activity_clean"
             android:launchMode="singleTask" >
             <intent-filter>
@@ -51,15 +52,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.ui.ProfileActivity"
+            android:name="com.ayros.historycleaner.legacy.ui.ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.ui.DataViewActivity"
+            android:name="com.ayros.historycleaner.legacy.ui.DataViewActivity"
             android:label="@string/title_activity_data_view" >
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.ui.ShortcutActivity"
+            android:name="com.ayros.historycleaner.legacy.ui.ShortcutActivity"
             android:icon="@drawable/clean"
             android:label="History Cleaner" >
             <intent-filter>
@@ -69,11 +70,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.ui.HelpActivity"
+            android:name="com.ayros.historycleaner.legacy.ui.HelpActivity"
             android:label="@string/title_activity_help" >
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.locale.ui.EditPluginActivity"
+            android:name="com.ayros.historycleaner.legacy.locale.ui.EditPluginActivity"
             android:exported="true"
             android:label="@string/app_plugin_name" >
             <intent-filter>
@@ -82,7 +83,7 @@
         </activity>
 
         <receiver
-            android:name="com.ayros.historycleaner.locale.receiver.FireReceiver"
+            android:name="com.ayros.historycleaner.legacy.locale.receiver.FireReceiver"
             android:exported="true"
             android:process=":background" >
 

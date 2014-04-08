@@ -1,15 +1,10 @@
 3.0.4
-- Fixed crash on Gingerbread devices
+- App now requires Android 4.0. If you are running Android 2.X (Froyo or Gingerbread), please uninstall this app and install https://play.google.com/store/apps/details?id=com.ayros.historycleaner.legacy to continue to receive updates!
 
 3.0.1-3.0.3
 - Added Firefox:Local Storage and Firefox:Open Tabs
 - Added SMS history (Jelly Bean and below)
 - Added Chrome:Local Storage and Chrome:Open Tabs
 - Bug fixes
-
-3.0.0
-- The app is now open source and free
-- Send me an email at ayros@email.com if you have paid money for this app in the past two weeks for a refund
-- Many under-the-hood changes
 
 Email ayros@email.com if you have any issues, I am here to help.

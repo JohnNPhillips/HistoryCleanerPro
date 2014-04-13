@@ -6,7 +6,7 @@
     android:versionName="3.0.4" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="7"
         android:targetSdkVersion="19" />
 
     <uses-feature
@@ -30,7 +30,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.ayros.historycleaner.ui.SplashActivity"
+            android:name="com.ayros.historycleaner.ui.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,11 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ayros.historycleaner.ui.MainActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.ayros.historycleaner.ui.CleanActivity"
+            android:name="com.ayros.historycleaner.ui.ShortcutCleanActivity"
             android:label="@string/title_activity_clean"
             android:launchMode="singleTask" >
             <intent-filter>

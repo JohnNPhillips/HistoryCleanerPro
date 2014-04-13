@@ -3,19 +3,21 @@
 
     <string name="app_name">History Cleaner Pro</string>
     <string name="hello_world">Hello world!</string>
-    <string name="clear_items">Clear Items</string>
     <string name="empty"></string>
     <string name="splash_loading">Loading&#8230;</string>
+    <!--  -->
     <string name="clean_menu_save_as_profile">Save as Profile</string>
     <string name="clean_menu_select_all">Select All</string>
     <string name="clean_menu_select_none">Select None</string>
-    <!-- <string name="clean_menu_settings">Settings</string> -->
-    <string name="clean_menu_rate">Rate App</string>
-    <string name="clean_menu_help">Help &amp; Support</string>
+    <!--  -->
+    <string name="main_menu_rate">Rate App</string>
+    <string name="main_menu_help">Help &amp; Support</string>
     <!--  -->
     <string name="title_activity_data_view">Data View</string>
     <string name="title_activity_clean">History Cleaner Pro</string>
     <string name="title_activity_profile">Profiles</string>
+    <!--  -->
+    <string name="clean_clear_items">Clear Items</string>
     <!--  -->
     <string name="profile_list_row_load">Load</string>
     <string name="profile_list_row_settings">Settings</string>

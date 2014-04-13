@@ -3,8 +3,8 @@ package com.ayros.historycleaner.cleaning;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -605,7 +605,7 @@ public class CategoryList
 		return catLayout;
 	}
 	
-	public void registerContextMenu(Activity a)
+	public void registerContextMenu(Fragment f)
 	{
 		for (CleanItem item : getAllItems(false))
 		{
@@ -614,7 +614,7 @@ public class CategoryList
 			if (itemView != null)
 			{
 				TextView itemName = (TextView)itemView.findViewById(R.id.item_name);
-				a.registerForContextMenu(itemName);
+				f.registerForContextMenu(itemName);
 			}
 		}
 	}

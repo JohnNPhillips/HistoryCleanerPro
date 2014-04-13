@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
@@ -33,6 +34,12 @@ public class _System_FrequentContacts extends CleanItem
 	@Override
 	public boolean isApplicable()
 	{
+		// Frequent contacts isn't available until Honeycomb
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+		{
+			return false;
+		}
+		
 		PackageManager pm = Globals.getContext().getPackageManager();
 		return pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
 	}

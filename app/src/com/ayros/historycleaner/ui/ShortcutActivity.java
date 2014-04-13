@@ -2,6 +2,7 @@ package com.ayros.historycleaner.ui;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -29,7 +30,7 @@ public class ShortcutActivity extends Activity
 	protected String[] getProfileNames()
 	{
 		List<String> namesList = ProfileList.getNamesList(false);
-		
+
 		if (namesList.size() > 0)
 		{
 			return namesList.toArray(new String[namesList.size()]);
@@ -69,6 +70,7 @@ public class ShortcutActivity extends Activity
 		final Button btnOk = (Button)dialog.findViewById(R.id.shortcut_create_btnOk);
 		btnOk.setOnClickListener(new OnClickListener()
 		{
+			@SuppressLint("InlinedApi")
 			@Override
 			public void onClick(View v)
 			{
@@ -78,11 +80,11 @@ public class ShortcutActivity extends Activity
 				}
 				else
 				{
-					Intent shortcutIntent = new Intent(ShortcutActivity.this, CleanActivity.class);
+					Intent shortcutIntent = new Intent(ShortcutActivity.this, ShortcutCleanActivity.class);
 					shortcutIntent.putExtra(SHORTCUT_PROFILE_NAME, selectedProfile);
 					shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-					
+
 					ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext(ShortcutActivity.this, R.drawable.clean);
 					Intent intent = new Intent();
 					intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);

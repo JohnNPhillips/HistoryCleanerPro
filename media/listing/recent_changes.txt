@@ -1,10 +1,8 @@
-3.0.4
-- App now requires Android 4.0. If you are running Android 2.X (Froyo or Gingerbread), please uninstall this app and install https://play.google.com/store/apps/details?id=com.ayros.historycleaner.legacy to continue to receive updates!
+3.0.5
+- Major under-the-hood interface rewrite, please report any bugs you may encounter
+- Changed required Android version back to 2.1 (Froyo). The legacy version of this app is no longer required
 
-3.0.1-3.0.3
-- Added Firefox:Local Storage and Firefox:Open Tabs
-- Added SMS history (Jelly Bean and below)
-- Added Chrome:Local Storage and Chrome:Open Tabs
-- Bug fixes
+3.0.4
+- App now requires Android 4.0 (No longer the case, see 3.0.5)
 
 Email ayros@email.com if you have any issues, I am here to help.

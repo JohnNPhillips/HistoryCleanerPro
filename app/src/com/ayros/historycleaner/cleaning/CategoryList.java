@@ -113,7 +113,25 @@ public class CategoryList
 		cat.addItem(new SimpleFileItem(cat, "Open Tabs", "com.android.chrome", "/files/*", true));
 
 		cats.add(cat);
-		
+
+		// -------------------
+		// ----- Clipper -----
+		// -------------------
+		cat = new Category("Clipper");
+		cat.addItem(new SimpleDatabaseItem
+		(
+			cat, "Saved Clipboards", "org.rojekti.clipper", "/databases/Clipper2.sqlite3",
+			new DBQuery
+			(
+				new String[] { "Text" },
+				"clippings",
+				new String[] { "contents" },
+				"list_id = 1"
+			),
+			new String[] { "DELETE FROM clippings WHERE list_id = 1;" }
+		));
+		cats.add(cat);
+
 		// --------------------------
 		// ----- Dictionary.com -----
 		// --------------------------

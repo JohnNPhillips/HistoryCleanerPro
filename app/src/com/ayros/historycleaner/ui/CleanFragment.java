@@ -60,6 +60,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	private CategoryList catList = null;
 
 	private Profile autoCleanProfile = null;
+	private String displayTip = null;
 
 	//
 	// Life-cycle Methods
@@ -70,6 +71,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		CleanFragment fragment = new CleanFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
+		fragment.displayTip = getTip();
 
 		return fragment;
 	}
@@ -138,9 +140,10 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 			autoCleanProfile = null;
 			cleanItems(catList, true);
 		}
-		else
+		else if (displayTip != null)
 		{
-			Toast.makeText(getActivity(), getTip(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), displayTip, Toast.LENGTH_LONG).show();
+			displayTip = null;
 		}
 	}
 
@@ -267,7 +270,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 			public void cleaningComplete(CleanResults results)
 			{
 				pd.cancel();
-				
+
 				final AlertDialog.Builder resultsDialog = new AlertDialog.Builder(getActivity());
 				resultsDialog.setTitle("Cleaning Results");
 				resultsDialog.setMessage(results.toString());
@@ -298,7 +301,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		});
 	}
 
-	public String getTip()
+	public static String getTip()
 	{
 		String[] tips = new String[]
 		{

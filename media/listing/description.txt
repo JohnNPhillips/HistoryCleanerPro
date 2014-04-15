@@ -5,10 +5,8 @@ History Cleaner Pro is the most powerful history and cache cleaning tool for And
 
 In addition to being powerful, it is also easy to use. To simply clear a few items, just check them and press the button to do so. If there are a few items you want to clear frequently, you have the option to create shortcuts on your homescreen that can clear customizable lists of items in just one click. For advanced users who want total control, there is even Tasker support for virtually endless customization.
 
-Unsure of whether History Cleaner Pro is for you? Just download and try it out risk free for a week. We offer an extended seven day, no questions asked, return policy. Just send us an email and we'll have your money refunded within 24 hours.
-
 Features:
-★ Clears over 45 different items with new ones continually added
+★ Clears over 50 different items with new ones continually added
 ★ View data to be cleared (supported by most, but not all items)
 ★ Profile support for saving lists of selected items
 ★ Homescreen shortcuts for one-click clearing
@@ -18,6 +16,7 @@ Supported Items:
 ★ All Application Caches
 ★ Default Android Browser (History)
 ★ Clipboard
+★ Clipper (Saved Clipboards)
 ★ Frequent Contacts
 ★ Google Play (Search History)
 ★ Call History
@@ -30,6 +29,7 @@ Supported Items:
 ★ Dolphin Browser Mini (Cache, Cookies, History, Local Storage)
 ★ eBay (Search History)
 ★ Firefox (Cache, Cookies, History, Local Storage, Open Tabs)
+★ Firefox Beta (Cache, Cookies, History, Local Storage, Open Tabs)
 ★ Gmail (Search History)
 ★ Google Calendar (Search History)
 ★ IMDb (History, Search Suggestions)

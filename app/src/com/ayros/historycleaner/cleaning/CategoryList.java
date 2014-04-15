@@ -235,6 +235,10 @@ public class CategoryList
 		));
 		cats.add(cat);
 		
+
+		// -------------------
+		// ----- Firefox -----
+		// -------------------
 		cat = new Category("Firefox");
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_Cache(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_Cookies(cat));
@@ -242,7 +246,18 @@ public class CategoryList
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_LocalStorage(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_OpenTabs(cat));
 		cats.add(cat);
-		
+
+		// ------------------------
+		// ----- Firefox Beta -----
+		// ------------------------
+		cat = new Category("Firefox Beta");
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_Cache(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_Cookies(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_History(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_LocalStorage(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_OpenTabs(cat));
+		cats.add(cat);
+
 		// -----------------
 		// ----- Gmail -----
 		// -----------------

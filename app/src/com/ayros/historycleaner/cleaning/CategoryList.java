@@ -114,6 +114,52 @@ public class CategoryList
 
 		cats.add(cat);
 
+		// -----------------------
+		// ----- Chrome Beta -----
+		// -----------------------
+
+		cat = new Category("Chrome Beta");
+
+		cat.addItem(new SimpleFileItem(cat, "Cache", "com.chrome.beta", "/cache/*", true));
+
+		cat.addItem(new SimpleDatabaseItem
+		(
+			cat, "Cookies", "com.chrome.beta", "/app_chrome/Default/Cookies",
+			new DBQuery
+			(
+				new String[] { "Domain", "Cookie Name", "Cookie Value" },
+				"cookies",
+				new String[] { "host_key", "name", "value" }
+			),
+			new String[] { "DELETE FROM cookies;" }
+		));
+
+		cat.addItem(new SimpleDatabaseItem
+		(
+			cat, "History", "com.chrome.beta", "/app_chrome/Default/History",
+			new DBQuery
+			(
+				new String[] { "Title", "Visit Count", "URL" },
+				"urls",
+				new String[] { "title", "visit_count", "url" }
+			),
+			new String[]
+			{
+				"DELETE FROM visits;",
+				"DELETE FROM visit_source;",
+				"DELETE FROM segments;",
+				"DELETE FROM segment_usage;",
+				"DELETE FROM urls;",
+				"DELETE FROM keyword_search_terms;",
+			}
+		));
+
+		cat.addItem(new SimpleFileItem(cat, "Local Storage", "com.chrome.beta", "/app_chrome/Default/Local Storage/*", true));
+
+		cat.addItem(new SimpleFileItem(cat, "Open Tabs", "com.chrome.beta", "/app_tabs/*", true));
+
+		cats.add(cat);
+
 		// -------------------
 		// ----- Clipper -----
 		// -------------------

@@ -3,10 +3,14 @@ package com.ayros.historycleaner.ui;
 import java.io.IOException;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
@@ -15,9 +19,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -190,14 +196,42 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	// Other Methods
 	//
 
+	@SuppressLint("InlinedApi")
+	@SuppressWarnings("deprecation")
 	public void cleanItems(final CategoryList categoryList, final boolean exitOnFinish)
 	{
+		// Lock orientation
+		final int prevOrientation = getActivity().getRequestedOrientation();
+		WindowManager wm = (WindowManager)getActivity().getSystemService(Context.WINDOW_SERVICE);
+		int REVERSE_PORTRAIT = Build.VERSION.SDK_INT >= 9 ?
+			ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+		int REVERSE_LANDSCAPE = Build.VERSION.SDK_INT >= 9 ?
+			ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+		switch (wm.getDefaultDisplay().getOrientation())
+		{
+			case Surface.ROTATION_0:
+				getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+				break;
+			case Surface.ROTATION_90:
+				getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+				break;
+			case Surface.ROTATION_180:
+				getActivity().setRequestedOrientation(REVERSE_PORTRAIT);
+				break;
+			default:
+				getActivity().setRequestedOrientation(REVERSE_LANDSCAPE);
+		}
+
 		if (categoryList.getAllItems(true).size() == 0)
 		{
 			Toast.makeText(getActivity(), "Please select at least one item to clear!", Toast.LENGTH_LONG).show();
 			if (exitOnFinish)
 			{
 				getActivity().finish();
+			}
+			else
+			{
+				getActivity().setRequestedOrientation(prevOrientation);
 			}
 			return;
 		}
@@ -212,6 +246,10 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 				if (exitOnFinish)
 				{
 					getActivity().finish();
+				}
+				else
+				{
+					getActivity().setRequestedOrientation(prevOrientation);
 				}
 				return;
 			}
@@ -230,6 +268,10 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 					{
 						getActivity().finish();
 					}
+					else
+					{
+						getActivity().setRequestedOrientation(prevOrientation);
+					}
 					return;
 				}
 				catch (Exception e)
@@ -239,6 +281,10 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 					if (exitOnFinish)
 					{
 						getActivity().finish();
+					}
+					else
+					{
+						getActivity().setRequestedOrientation(prevOrientation);
 					}
 					return;
 				}
@@ -283,6 +329,10 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 						if (exitOnFinish)
 						{
 							getActivity().finish();
+						}
+						else
+						{
+							getActivity().setRequestedOrientation(prevOrientation);
 						}
 					}
 				});

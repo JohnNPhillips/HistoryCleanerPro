@@ -1,3 +1,6 @@
+3.0.8
+- Fixed crash when app is rotated during cleaning
+
 3.0.7
 - Added Chrome Beta
 

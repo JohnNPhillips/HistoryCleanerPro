@@ -17,6 +17,7 @@ Supported Items:
 ★ Default Android Browser (History)
 ★ Clipboard
 ★ Clipper (Saved Clipboards)
+★ Clipper Plus (Saved Clipboards)
 ★ Frequent Contacts
 ★ Google Play (Search History)
 ★ Call History

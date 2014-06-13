@@ -1,3 +1,4 @@
+- Added Clipper+
 - Minor bug fixes
 
 3.0.8

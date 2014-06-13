@@ -34,6 +34,10 @@ public class _FirefoxBeta_LocalStorage extends CleanItem
 			Logger.error("Could not get FireFox Beta data path to clear local storage");
 			return false;
 		}
+		else if (path.length() == 0)
+		{
+			return true;
+		}
 
 		if (!RootTools.exists(path + "/webappsstore.sqlite"))
 		{

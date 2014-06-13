@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ayros.historycleaner.Globals;
@@ -33,8 +34,8 @@ public class _Firefox_History extends CleanItem
 		String profiles = RootHelper.getFileContents("/data/data/org.mozilla.firefox/files/mozilla/profiles.ini");
 		if (profiles == null)
 		{
-			Logger.error("Could not read the FireFox profiles.ini");
-			return null;
+			Logger.debug("Could not read the FireFox profiles.ini - app hasn't been opened yet");
+			return "";
 		}
 
 		String[] lines = profiles.split("\n");
@@ -68,6 +69,10 @@ public class _Firefox_History extends CleanItem
 			Logger.error("Could not get FireFox data path to view history");
 			return null;
 		}
+		else if (path.length() == 0)
+		{
+			return new ArrayList<String []>();
+		}
 
 		return DBHelper.queryDatabase
 		(
@@ -88,6 +93,10 @@ public class _Firefox_History extends CleanItem
 		{
 			Logger.error("Could not get FireFox data path to clear history");
 			return false;
+		}
+		else if (path.length() == 0)
+		{
+			return true;
 		}
 
 		return DBHelper.updateDatabase

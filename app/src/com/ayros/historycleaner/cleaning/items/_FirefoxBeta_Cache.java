@@ -33,6 +33,10 @@ public class _FirefoxBeta_Cache extends CleanItem
 			Logger.error("Could not get FireFox Beta data path to clear cache");
 			return false;
 		}
+		else if (path.length() == 0)
+		{
+			return true;
+		}
 
 		return RootHelper.deleteFileOrFolder(path + "/Cache", false);
 	}

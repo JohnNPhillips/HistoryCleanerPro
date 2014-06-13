@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ayros.historycleaner.Globals;
@@ -36,6 +37,10 @@ public class _FirefoxBeta_Cookies extends CleanItem
 			Logger.error("Could not get FireFox Beta data path to view cookies");
 			return null;
 		}
+		else if (path.length() == 0)
+		{
+			return new ArrayList<String []>();
+		}
 
 		return DBHelper.queryDatabase
 		(
@@ -56,6 +61,10 @@ public class _FirefoxBeta_Cookies extends CleanItem
 		{
 			Logger.error("Could not get FireFox Beta data path to clear cookies");
 			return false;
+		}
+		else if (path.length() == 0)
+		{
+			return true;
 		}
 
 		return DBHelper.updateDatabase

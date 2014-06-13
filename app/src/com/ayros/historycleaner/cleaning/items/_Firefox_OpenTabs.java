@@ -33,6 +33,10 @@ public class _Firefox_OpenTabs extends CleanItem
 			Logger.error("Could not get FireFox data path to clear open tabs");
 			return false;
 		}
+		else if (path.length() == 0)
+		{
+			return true;
+		}
 
 		return RootHelper.deleteFileOrFolder(path + "/sessionstore.js", false);
 	}

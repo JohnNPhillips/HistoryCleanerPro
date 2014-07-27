@@ -1,5 +1,6 @@
 - Added Clipper+
 - Minor bug fixes
+- Fix clearing Chrome open tabs
 
 3.0.8
 - Fixed crash when app is rotated during cleaning

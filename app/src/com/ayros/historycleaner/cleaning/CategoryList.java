@@ -110,7 +110,7 @@ public class CategoryList
 
 		cat.addItem(new SimpleFileItem(cat, "Local Storage", "com.android.chrome", "/app_chrome/Default/Local Storage/*", true));
 
-		cat.addItem(new SimpleFileItem(cat, "Open Tabs", "com.android.chrome", "/files/*", true));
+		cat.addItem(new SimpleFileItem(cat, "Open Tabs", "com.android.chrome", "/app_tabs/*", true));
 
 		cats.add(cat);
 

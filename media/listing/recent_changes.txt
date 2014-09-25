@@ -1,3 +1,6 @@
+3.0.10
+- Clipper+ bug fix
+
 3.0.9
 - Added Clipper+
 - Minor bug fixes
@@ -12,9 +15,5 @@
 3.0.6
 - Added Firefox Beta
 - Added Clipper
-
-3.0.5
-- Major under-the-hood interface rewrite, please report any bugs you may encounter
-- Changed required Android version back to 2.1 (Froyo). The legacy version of this app is no longer required
 
 Email ayros@email.com if you have any issues, I am here to help.

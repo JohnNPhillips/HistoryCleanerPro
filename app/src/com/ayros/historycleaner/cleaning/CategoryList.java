@@ -181,7 +181,7 @@ public class CategoryList
 		// --------------------
 		// ----- Clipper+ -----
 		// --------------------
-		cat = new Category("Clipper+");
+		cat = new Category("Clipper Plus");
 		cat.addItem(new SimpleDatabaseItem
 		(
 			cat, "Saved Clipboards", "fi.rojekti.clipper", "/databases/Clipper2.sqlite3",

@@ -315,7 +315,14 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 			@Override
 			public void cleaningComplete(CleanResults results)
 			{
-				pd.cancel();
+				try
+				{
+					pd.cancel();
+				}
+				catch (Exception e)
+				{
+					Logger.errorST("Problem closing progress dialog upon cleaning completion", e);
+				}
 
 				final AlertDialog.Builder resultsDialog = new AlertDialog.Builder(getActivity());
 				resultsDialog.setTitle("Cleaning Results");

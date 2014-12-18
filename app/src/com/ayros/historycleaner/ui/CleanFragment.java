@@ -129,6 +129,12 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		Button cleanButton = (Button)getView().findViewById(R.id.clean_btnClear);
 		cleanButton.setOnClickListener(this);
 
+		// Context is needed in Logger class
+		if (Globals.getContext() == null)
+		{
+			Globals.setContext(this.getActivity());
+		}
+
 		if (Logger.isDebugMode() || Logger.isLogToFileMode())
 		{
 			if (Logger.isDebugMode())

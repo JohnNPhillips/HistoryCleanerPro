@@ -418,7 +418,24 @@ public class CategoryList
 		cat.addItem(new SimpleFileItem(cat, "Local Storage", "acr.browser.barebones", "/app_webview/Local Storage", true));
 
 		cats.add(cat);
+
+		// ----------------------------------
+		// ----- Lightning Browser Plus -----
+		// ----------------------------------
+		cat = new Category("Lightning Browser Plus");
 		
+		cat.addItem(new SimpleFileItem(cat, "Cache", "acr.browser.lightning", "/app_webview/Cache/*", true));
+
+		String[] lightningPlusCookies = new String[] { "/app_webview/Cookies", "/app_webview/Cookies-journal" };
+		cat.addItem(new SimpleFileItem(cat, "Cookies", "acr.browser.lightning", lightningPlusCookies, true));
+
+		String[] lightningPlusHistory = new String[] { "/files/history.html", "/databases/historyManager", "/databases/historyManager-journal" };
+		cat.addItem(new SimpleFileItem(cat, "History", "acr.browser.lightning", lightningPlusHistory, true));
+
+		cat.addItem(new SimpleFileItem(cat, "Local Storage", "acr.browser.lightning", "/app_webview/Local Storage", true));
+
+		cats.add(cat);
+
 		// ---------------------------
 		// ----- Maxthon Browser -----
 		// ---------------------------

@@ -36,6 +36,7 @@ Supported Items:
 ★ Google Calendar (Search History)
 ★ IMDb (History, Search Suggestions)
 ★ Lightning Browser (Cache, Cookies, History, Local Storage)
+★ Lightning Browser Plus (Cache, Cookies, History, Local Storage)
 ★ Maxthon Browser (Cache, Cookies, History)
 ★ Merriam-Webster (Recent Words)
 ★ ONE Browser(Cache, Cookies, History, Local Storage)

@@ -340,6 +340,17 @@ public class CategoryList
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_OpenTabs(cat));
 		cats.add(cat);
 
+		// ---------------------------
+		// ----- Firefox Nightly -----
+		// ---------------------------
+		cat = new Category("Firefox Nightly");
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_Cache(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_Cookies(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_History(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_LocalStorage(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_OpenTabs(cat));
+		cats.add(cat);
+
 		// -----------------
 		// ----- Gmail -----
 		// -----------------

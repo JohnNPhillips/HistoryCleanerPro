@@ -32,6 +32,7 @@ Supported Items:
 ★ eBay (Search History)
 ★ Firefox (Cache, Cookies, History, Local Storage, Open Tabs)
 ★ Firefox Beta (Cache, Cookies, History, Local Storage, Open Tabs)
+★ Firefox Nightly (Cache, Cookies, History, Local Storage, Open Tabs)
 ★ Gmail (Search History)
 ★ Google Calendar (Search History)
 ★ IMDb (History, Search Suggestions)

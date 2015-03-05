@@ -1,36 +1,36 @@
-package com.ayros.historycleaner.cleaning.items;
+package com.ayros.historycleaner.cleaning.items.firefox;
 
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
-public class _FirefoxBeta_Cache extends CleanItem
+public class _Firefox_Cache extends CleanItem
 {
-	public _FirefoxBeta_Cache(Category parent)
+	public _Firefox_Cache(Category parent)
 	{
 		super(parent);
 	}
-
+	
 	@Override
 	public String getDisplayName()
 	{
 		return "Cache";
 	}
-
+	
 	@Override
 	public String getPackageName()
 	{
-		return "org.mozilla.firefox_beta";
+		return "org.mozilla.firefox";
 	}
 
 	@Override
 	public boolean clean()
 	{
-		String path = _FirefoxBeta_History.getFirefoxBetaDataPath();
+		String path = _Firefox_History.getFirefoxDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox Beta data path to clear cache");
+			Logger.error("Could not get FireFox data path to clear cache");
 			return false;
 		}
 		else if (path.length() == 0)

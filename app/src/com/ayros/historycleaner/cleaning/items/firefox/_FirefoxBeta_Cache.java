@@ -1,13 +1,13 @@
-package com.ayros.historycleaner.cleaning.items;
+package com.ayros.historycleaner.cleaning.items.firefox;
 
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
-public class _FirefoxNightly_OpenTabs extends CleanItem
+public class _FirefoxBeta_Cache extends CleanItem
 {
-	public _FirefoxNightly_OpenTabs(Category parent)
+	public _FirefoxBeta_Cache(Category parent)
 	{
 		super(parent);
 	}
@@ -15,22 +15,22 @@ public class _FirefoxNightly_OpenTabs extends CleanItem
 	@Override
 	public String getDisplayName()
 	{
-		return "Open Tabs";
+		return "Cache";
 	}
 
 	@Override
 	public String getPackageName()
 	{
-		return "org.mozilla.fennec";
+		return "org.mozilla.firefox_beta";
 	}
 
 	@Override
 	public boolean clean()
 	{
-		String path = _FirefoxNightly_History.getFirefoxNightlyDataPath();
+		String path = _FirefoxBeta_History.getFirefoxBetaDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox Nightly data path to clear open tabs");
+			Logger.error("Could not get FireFox Beta data path to clear cache");
 			return false;
 		}
 		else if (path.length() == 0)
@@ -38,6 +38,6 @@ public class _FirefoxNightly_OpenTabs extends CleanItem
 			return true;
 		}
 
-		return RootHelper.deleteFileOrFolder(path + "/sessionstore.js", false);
+		return RootHelper.deleteFileOrFolder(path + "/Cache", false);
 	}
 }

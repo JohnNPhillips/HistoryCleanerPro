@@ -1,4 +1,4 @@
-package com.ayros.historycleaner.cleaning.items;
+package com.ayros.historycleaner.cleaning.items.firefox;
 
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
@@ -6,9 +6,9 @@ import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 import com.stericson.RootTools.RootTools;
 
-public class _Firefox_LocalStorage extends CleanItem
+public class _FirefoxBeta_LocalStorage extends CleanItem
 {
-	public _Firefox_LocalStorage(Category parent)
+	public _FirefoxBeta_LocalStorage(Category parent)
 	{
 		super(parent);
 	}
@@ -22,16 +22,16 @@ public class _Firefox_LocalStorage extends CleanItem
 	@Override
 	public String getPackageName()
 	{
-		return "org.mozilla.firefox";
+		return "org.mozilla.firefox_beta";
 	}
 
 	@Override
 	public boolean clean()
 	{
-		String path = _Firefox_History.getFirefoxDataPath();
+		String path = _FirefoxBeta_History.getFirefoxBetaDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox data path to clear local storage");
+			Logger.error("Could not get FireFox Beta data path to clear local storage");
 			return false;
 		}
 		else if (path.length() == 0)

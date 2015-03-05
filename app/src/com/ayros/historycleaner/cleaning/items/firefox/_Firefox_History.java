@@ -1,4 +1,4 @@
-package com.ayros.historycleaner.cleaning.items;
+package com.ayros.historycleaner.cleaning.items.firefox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import com.ayros.historycleaner.helpers.DBHelper;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
-public class _FirefoxNightly_History extends CleanItem
+public class _Firefox_History extends CleanItem
 {
-	public _FirefoxNightly_History(Category parent)
+	public _Firefox_History(Category parent)
 	{
 		super(parent);
 	}
@@ -26,15 +26,15 @@ public class _FirefoxNightly_History extends CleanItem
 	@Override
 	public String getPackageName()
 	{
-		return "org.mozilla.fennec";
+		return "org.mozilla.firefox";
 	}
 
-	public static String getFirefoxNightlyDataPath()
+	public static String getFirefoxDataPath()
 	{
-		String profiles = RootHelper.getFileContents("/data/data/org.mozilla.fennec/files/mozilla/profiles.ini");
+		String profiles = RootHelper.getFileContents("/data/data/org.mozilla.firefox/files/mozilla/profiles.ini");
 		if (profiles == null)
 		{
-			Logger.debug("Could not read the FireFox Nightly profiles.ini - app hasn't been opened yet");
+			Logger.debug("Could not read the FireFox profiles.ini - app hasn't been opened yet");
 			return "";
 		}
 
@@ -43,30 +43,30 @@ public class _FirefoxNightly_History extends CleanItem
 		{
 			if (line.contains("Path="))
 			{
-				String folder = "/data/data/org.mozilla.fennec/files/mozilla/" + line.replace("Path=", "");
+				String folder = "/data/data/org.mozilla.firefox/files/mozilla/" + line.replace("Path=", "");
 				if (RootHelper.fileOrFolderExists(folder))
 				{
 					return folder;
 				}
 				else
 				{
-					Logger.error("Found FireFox Nightly data path, but it doesn't seem to exist: " + folder);
+					Logger.error("Found FireFox data path, but it doesn't seem to exist: " + folder);
 					return null;
 				}
 			}
 		}
 
-		Logger.error("Could not find path variable in FireFox Nightly profiles.ini");
+		Logger.error("Could not find path variable in FireFox profiles.ini");
 		return null;
 	}
 	
 	@Override
 	public List<String []> getSavedData()
 	{
-		String path = getFirefoxNightlyDataPath();
+		String path = getFirefoxDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox Nightly data path to view history");
+			Logger.error("Could not get FireFox data path to view history");
 			return null;
 		}
 		else if (path.length() == 0)
@@ -88,10 +88,10 @@ public class _FirefoxNightly_History extends CleanItem
 	@Override
 	public boolean clean()
 	{
-		String path = getFirefoxNightlyDataPath();
+		String path = getFirefoxDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox Nightly data path to clear history");
+			Logger.error("Could not get FireFox data path to clear history");
 			return false;
 		}
 		else if (path.length() == 0)

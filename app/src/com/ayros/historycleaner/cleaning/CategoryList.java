@@ -322,33 +322,33 @@ public class CategoryList
 		// ----- Firefox -----
 		// -------------------
 		cat = new Category("Firefox");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_Cache(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_Cookies(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_History(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_LocalStorage(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._Firefox_OpenTabs(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_Cache(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_Cookies(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_History(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_LocalStorage(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_OpenTabs(cat));
 		cats.add(cat);
 
 		// ------------------------
 		// ----- Firefox Beta -----
 		// ------------------------
 		cat = new Category("Firefox Beta");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_Cache(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_Cookies(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_History(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_LocalStorage(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxBeta_OpenTabs(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_Cache(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_Cookies(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_History(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_LocalStorage(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_OpenTabs(cat));
 		cats.add(cat);
 
 		// ---------------------------
 		// ----- Firefox Nightly -----
 		// ---------------------------
 		cat = new Category("Firefox Nightly");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_Cache(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_Cookies(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_History(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_LocalStorage(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._FirefoxNightly_OpenTabs(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_Cache(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_Cookies(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_History(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_LocalStorage(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_OpenTabs(cat));
 		cats.add(cat);
 
 		// -----------------

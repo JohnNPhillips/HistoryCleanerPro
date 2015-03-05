@@ -1,14 +1,13 @@
-package com.ayros.historycleaner.cleaning.items;
+package com.ayros.historycleaner.cleaning.items.firefox;
 
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
-import com.stericson.RootTools.RootTools;
 
-public class _FirefoxBeta_LocalStorage extends CleanItem
+public class _FirefoxBeta_OpenTabs extends CleanItem
 {
-	public _FirefoxBeta_LocalStorage(Category parent)
+	public _FirefoxBeta_OpenTabs(Category parent)
 	{
 		super(parent);
 	}
@@ -16,7 +15,7 @@ public class _FirefoxBeta_LocalStorage extends CleanItem
 	@Override
 	public String getDisplayName()
 	{
-		return "Local Storage";
+		return "Open Tabs";
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class _FirefoxBeta_LocalStorage extends CleanItem
 		String path = _FirefoxBeta_History.getFirefoxBetaDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox Beta data path to clear local storage");
+			Logger.error("Could not get FireFox Beta data path to clear open tabs");
 			return false;
 		}
 		else if (path.length() == 0)
@@ -39,11 +38,6 @@ public class _FirefoxBeta_LocalStorage extends CleanItem
 			return true;
 		}
 
-		if (!RootTools.exists(path + "/webappsstore.sqlite"))
-		{
-			return true;
-		}
-
-		return RootHelper.deleteFileOrFolder(path + "/webappsstore.sqlite*", false);
+		return RootHelper.deleteFileOrFolder(path + "/sessionstore.js", false);
 	}
 }

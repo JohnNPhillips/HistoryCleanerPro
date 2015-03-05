@@ -1,4 +1,4 @@
-package com.ayros.historycleaner.cleaning.items;
+package com.ayros.historycleaner.cleaning.items.firefox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import com.ayros.historycleaner.helpers.DBHelper;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
-public class _FirefoxBeta_History extends CleanItem
+public class _FirefoxNightly_History extends CleanItem
 {
-	public _FirefoxBeta_History(Category parent)
+	public _FirefoxNightly_History(Category parent)
 	{
 		super(parent);
 	}
@@ -26,15 +26,15 @@ public class _FirefoxBeta_History extends CleanItem
 	@Override
 	public String getPackageName()
 	{
-		return "org.mozilla.firefox_beta";
+		return "org.mozilla.fennec";
 	}
 
-	public static String getFirefoxBetaDataPath()
+	public static String getFirefoxNightlyDataPath()
 	{
-		String profiles = RootHelper.getFileContents("/data/data/org.mozilla.firefox_beta/files/mozilla/profiles.ini");
+		String profiles = RootHelper.getFileContents("/data/data/org.mozilla.fennec/files/mozilla/profiles.ini");
 		if (profiles == null)
 		{
-			Logger.debug("Could not read the FireFox Beta profiles.ini - app hasn't been opened yet");
+			Logger.debug("Could not read the FireFox Nightly profiles.ini - app hasn't been opened yet");
 			return "";
 		}
 
@@ -43,30 +43,30 @@ public class _FirefoxBeta_History extends CleanItem
 		{
 			if (line.contains("Path="))
 			{
-				String folder = "/data/data/org.mozilla.firefox_beta/files/mozilla/" + line.replace("Path=", "");
+				String folder = "/data/data/org.mozilla.fennec/files/mozilla/" + line.replace("Path=", "");
 				if (RootHelper.fileOrFolderExists(folder))
 				{
 					return folder;
 				}
 				else
 				{
-					Logger.error("Found FireFox Beta data path, but it doesn't seem to exist: " + folder);
+					Logger.error("Found FireFox Nightly data path, but it doesn't seem to exist: " + folder);
 					return null;
 				}
 			}
 		}
 
-		Logger.error("Could not find path variable in FireFox Beta profiles.ini");
+		Logger.error("Could not find path variable in FireFox Nightly profiles.ini");
 		return null;
 	}
-
+	
 	@Override
-	public List<String[]> getSavedData()
+	public List<String []> getSavedData()
 	{
-		String path = getFirefoxBetaDataPath();
+		String path = getFirefoxNightlyDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox Beta data path to view history");
+			Logger.error("Could not get FireFox Nightly data path to view history");
 			return null;
 		}
 		else if (path.length() == 0)
@@ -84,14 +84,14 @@ public class _FirefoxBeta_History extends CleanItem
 			null
 		);
 	}
-
+	
 	@Override
 	public boolean clean()
 	{
-		String path = getFirefoxBetaDataPath();
+		String path = getFirefoxNightlyDataPath();
 		if (path == null)
 		{
-			Logger.error("Could not get FireFox Beta data path to clear history");
+			Logger.error("Could not get FireFox Nightly data path to clear history");
 			return false;
 		}
 		else if (path.length() == 0)

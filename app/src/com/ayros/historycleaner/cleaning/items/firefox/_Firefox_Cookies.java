@@ -1,4 +1,4 @@
-package com.ayros.historycleaner.cleaning.items;
+package com.ayros.historycleaner.cleaning.items.firefox;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,3 +1,7 @@
+3.1.0
+- Add Firefox Nightly
+- Add Waze recent destinations
+
 3.0.11
 - Add Lightning Browser Plus
 - Minor bug fixes

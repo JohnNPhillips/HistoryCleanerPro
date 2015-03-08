@@ -530,7 +530,28 @@ public class CategoryList
 		));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items._ONEBrowser_LocalStorage(cat));
 		cats.add(cat);
-		
+
+		// ----------------
+		// ----- Waze -----
+		// ----------------
+		cat = new Category("Waze");
+		cat.addItem(new SimpleDatabaseItem
+		(
+			cat, "History", "com.waze", "/user.db",
+			new DBQuery
+			(
+				new String[] { "Name" },
+				"RECENTS",
+				new String[] { "name" }
+			),
+			new String[]
+			{
+				"UPDATE sqlite_sequence SET seq='0' WHERE name='RECENTS';",
+				"DELETE FROM RECENTS;"
+			}
+		));
+		cats.add(cat);
+
 		// ---------------------
 		// ----- Wikipedia -----
 		// ---------------------

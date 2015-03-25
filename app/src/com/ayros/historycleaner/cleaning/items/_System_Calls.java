@@ -6,17 +6,23 @@ import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 
-public class _System_RecentCalls extends CleanItem
+public class _System_Calls extends CleanItem
 {
-	public _System_RecentCalls(Category parent)
+	String display;
+	int type;
+
+	public _System_Calls(Category parent, String display, int type)
 	{
 		super(parent);
+
+		this.display = display;
+		this.type = type;
 	}
-	
+
 	@Override
 	public String getDisplayName()
 	{
-		return "Recent Calls";
+		return display;
 	}
 
 	@Override
@@ -37,18 +43,19 @@ public class _System_RecentCalls extends CleanItem
 	{
 		return true;
 	}
-	
+
 	@Override
 	public boolean isRootRequired()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean clean()
 	{
-		Globals.getContext().getContentResolver().delete(android.provider.CallLog.Calls.CONTENT_URI, null, null);
-		
+		String whereClause = "TYPE='" + type + "'";
+		Globals.getContext().getContentResolver().delete(android.provider.CallLog.Calls.CONTENT_URI, whereClause, null);
+
 		return true;
 	}
 }

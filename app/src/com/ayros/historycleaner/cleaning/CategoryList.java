@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.provider.CallLog;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,12 @@ import android.widget.TextView;
 
 import com.ayros.historycleaner.R;
 import com.ayros.historycleaner.cleaning.SimpleDatabaseItem.DBQuery;
+import com.ayros.historycleaner.cleaning.items._System_BrowserHistory;
+import com.ayros.historycleaner.cleaning.items._System_Cache;
+import com.ayros.historycleaner.cleaning.items._System_Calls;
+import com.ayros.historycleaner.cleaning.items._System_Clipboard;
+import com.ayros.historycleaner.cleaning.items._System_FrequentContacts;
+import com.ayros.historycleaner.cleaning.items._System_SMS;
 
 public class CategoryList
 {
@@ -26,10 +33,10 @@ public class CategoryList
 		// ----- System -----
 		// ------------------
 		cat = new Category("System");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_Cache(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_BrowserHistory(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_Clipboard(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_FrequentContacts(cat));
+		cat.addItem(new _System_Cache(cat));
+		cat.addItem(new _System_BrowserHistory(cat));
+		cat.addItem(new _System_Clipboard(cat));
+		cat.addItem(new _System_FrequentContacts(cat));
 		cat.addItem(new SimpleDatabaseItem
 		(
 			cat, "Google Play History", "com.android.vending", "/databases/suggestions.db",
@@ -41,8 +48,10 @@ public class CategoryList
 			),
 			new String[] { "DELETE FROM suggestions;" }
 		));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_RecentCalls(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._System_SMS(cat));
+		cat.addItem(new _System_Calls(cat, "Outgoing Calls", CallLog.Calls.OUTGOING_TYPE));
+		cat.addItem(new _System_Calls(cat, "Incoming Calls", CallLog.Calls.INCOMING_TYPE));
+		cat.addItem(new _System_Calls(cat, "Missed Calls", CallLog.Calls.MISSED_TYPE));
+		cat.addItem(new _System_SMS(cat));
 		cats.add(cat);
 		
 		// ------------------------

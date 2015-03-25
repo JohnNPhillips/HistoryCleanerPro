@@ -41,6 +41,7 @@ Supported Items:
 ★ Maxthon Browser (Cache, Cookies, History)
 ★ Merriam-Webster (Recent Words)
 ★ ONE Browser(Cache, Cookies, History, Local Storage)
+★ Settings Searches (Lollipop and above)
 ★ Waze (History)
 ★ Wikipedia – Official (History)
 ★ Yelp (Searches, Viewed Places)

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.os.Build;
 import android.provider.CallLog;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -51,6 +52,24 @@ public class CategoryList
 		cat.addItem(new _System_Calls(cat, "Outgoing Calls", CallLog.Calls.OUTGOING_TYPE));
 		cat.addItem(new _System_Calls(cat, "Incoming Calls", CallLog.Calls.INCOMING_TYPE));
 		cat.addItem(new _System_Calls(cat, "Missed Calls", CallLog.Calls.MISSED_TYPE));
+		cat.addItem(new SimpleDatabaseItem
+		(
+			cat, "Settings Searches", "com.android.settings", "/databases/search_index.db",
+			new DBQuery
+			(
+				new String[] { "Search Term", "Timestamp" },
+				"saved_queries",
+				new String[] { "query", "timestamp" }
+			),
+			new String[] { "DELETE FROM saved_queries;" }
+		)
+		{
+			@Override
+			public boolean isApplicable()
+			{
+				return Build.VERSION.SDK_INT >= 21; // Lollipop
+			}
+		});
 		cat.addItem(new _System_SMS(cat));
 		cats.add(cat);
 		

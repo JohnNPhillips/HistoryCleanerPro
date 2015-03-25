@@ -1,3 +1,7 @@
+3.1.1
+- Split call log into separate outgoing, incoming, and missed call items
+- Added settings search history (Lollipop only)
+
 3.1.0
 - Add Firefox Nightly
 - Add Waze recent destinations
@@ -13,15 +17,5 @@
 - Added Clipper+
 - Minor bug fixes
 - Fix clearing Chrome open tabs
-
-3.0.8
-- Fixed crash when app is rotated during cleaning
-
-3.0.7
-- Added Chrome Beta
-
-3.0.6
-- Added Firefox Beta
-- Added Clipper
 
 Email ayros@email.com if you have any issues, I am here to help.

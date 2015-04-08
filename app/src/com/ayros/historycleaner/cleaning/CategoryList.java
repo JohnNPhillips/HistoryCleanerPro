@@ -575,7 +575,8 @@ public class CategoryList
 			new String[]
 			{
 				"UPDATE sqlite_sequence SET seq='0' WHERE name='RECENTS';",
-				"DELETE FROM RECENTS;"
+				"DELETE FROM RECENTS;",
+				"UPDATE FAVORITES SET access_time = '0';",
 			}
 		));
 		cats.add(cat);

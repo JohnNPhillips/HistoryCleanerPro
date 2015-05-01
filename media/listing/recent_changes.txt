@@ -1,3 +1,6 @@
+3.1.2
+- Update to clearing Waze recent destinations
+
 3.1.1
 - Split call log into separate outgoing, incoming, and missed call items
 - Added settings search history (Lollipop only)

@@ -587,14 +587,29 @@ public class CategoryList
 		cat = new Category("Wikipedia");
 		cat.addItem(new SimpleDatabaseItem
 		(
-			cat, "History", "org.wikipedia", "/app_database:historyDB.db",
+			cat, "Search History", "org.wikipedia", "/databases/wikipedia.db",
 			new DBQuery
 			(
-				new String[] { "History" },
-				"historyDB",
-				new String[] { "value" }
+				new String[] { "Search Term" },
+				"recentsearches",
+				new String[] { "text" }
 			),
-			new String[] { "DELETE FROM historyDB;" }
+			new String[] { "DELETE FROM recentsearches;" }
+		));
+		cat.addItem(new SimpleDatabaseItem
+		(
+			cat, "Browsing History", "org.wikipedia", "/databases/wikipedia.db",
+			new DBQuery
+			(
+				new String[] { "Page Title", "Timestamp" },
+				"history",
+				new String[] { "title", "timestamp" }
+			),
+			new String[]
+			{
+				"DELETE FROM history;",
+				"DELETE FROM pageimages;",
+			}
 		));
 		cats.add(cat);
 		

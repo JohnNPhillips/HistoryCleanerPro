@@ -355,6 +355,7 @@ public class CategoryList
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_History(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_LocalStorage(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_OpenTabs(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_SearchWidget(cat));
 		cats.add(cat);
 
 		// ------------------------
@@ -366,6 +367,7 @@ public class CategoryList
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_History(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_LocalStorage(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_OpenTabs(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_SearchWidget(cat));
 		cats.add(cat);
 
 		// ---------------------------
@@ -377,6 +379,7 @@ public class CategoryList
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_History(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_LocalStorage(cat));
 		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_OpenTabs(cat));
+		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_SearchWidget(cat));
 		cats.add(cat);
 
 		// -----------------

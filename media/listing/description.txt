@@ -43,7 +43,7 @@ Supported Items:
 ★ ONE Browser(Cache, Cookies, History, Local Storage)
 ★ Settings Searches (Lollipop and above)
 ★ Waze (History)
-★ Wikipedia – Official (History)
+★ Wikipedia – Official (Search History, Browsing History)
 ★ Yelp (Searches, Viewed Places)
 ★ Youtube (Searches)
 ★ …and more are always being added!

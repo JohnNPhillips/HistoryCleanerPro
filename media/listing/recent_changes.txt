@@ -1,15 +1,8 @@
+4.0.0
+- Numerous internal changes
+- Fixed Dictionary.com cleaning
+
 3.1.4
 - Fix rotation bug for some users
-
-3.1.3
-- Add clearing of Firefox search widget history (stable, beta, and nightly)
-- Update clearing of Wikipedia app (search and browsing history)
-
-3.1.2
-- Update to clearing Waze recent destinations
-
-3.1.1
-- Split call log into separate outgoing, incoming, and missed call items
-- Added settings search history (Lollipop only)
 
 Email ayros@email.com if you have any issues, I am here to help.

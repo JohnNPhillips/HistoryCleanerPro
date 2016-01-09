@@ -1,6 +1,7 @@
 4.0.0
-- Numerous internal changes
+- Numerous internal changes, please report any issues!
 - Fixed Dictionary.com cleaning
+- Fixed problems with missing BusyBox
 
 3.1.4
 - Fix rotation bug for some users

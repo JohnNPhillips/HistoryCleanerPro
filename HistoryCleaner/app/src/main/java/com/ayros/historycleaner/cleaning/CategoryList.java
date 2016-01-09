@@ -232,7 +232,7 @@ public class CategoryList
 			new DBQuery
 			(
 				new String[] { "Word" },
-				"history",
+				"Recents",
 				new String[] { "RecentName" }
 			),
 			new String[] { "DELETE FROM Recents;" }

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.stericson.RootShell.RootShell;
 import com.stericson.RootTools.RootTools;
 
 public class DatabaseModifier
@@ -31,7 +32,7 @@ public class DatabaseModifier
 			return true;
 		}
 
-		if (!RootTools.exists(path))
+		if (!RootHelper.fileOrFolderExists(path))
 		{
 			Logger.errorST("Database doesn't exist: " + path);
 			return false;
@@ -42,11 +43,11 @@ public class DatabaseModifier
 
 		for (String s : suffixes)
 		{
-			if (RootTools.exists(path + s))
+			if (RootHelper.fileOrFolderExists(path + s))
 			{
 				RootTools.copyFile(path + s, tempFile + s, false, true);
 
-				if (RootHelper.runAndWait("chmod 777 " + tempFile + s) == null)
+				if (RootHelper.runAndWait(RootTools.getWorkingToolbox() + " chmod 777 " + tempFile + s) == null)
 				{
 					Logger.errorST("Could not chmod database file " + tempFile + s);
 					return false;

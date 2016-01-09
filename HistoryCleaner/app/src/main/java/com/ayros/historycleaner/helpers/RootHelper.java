@@ -133,7 +133,7 @@ public class RootHelper
 			return null;
 		}
 
-		if (runAndWait("busybox chmod 777 " + tempFile) == null)
+		if (runAndWait(RootTools.getWorkingToolbox() + " chmod 777 " + tempFile) == null)
 		{
 			Logger.error("Could not set file attributes to read contents: " + tempFile);
 			return null;

@@ -7,7 +7,8 @@ import android.app.Activity;
 
 import com.ayros.historycleaner.UIRunner;
 import com.ayros.historycleaner.helpers.Logger;
-import com.stericson.RootTools.execution.Shell;
+import com.stericson.RootShell.execution.Shell;
+import com.stericson.RootTools.RootTools;
 
 public class Cleaner
 {
@@ -78,7 +79,7 @@ public class Cleaner
 			{
 				CleanResults results = new CleanResults();
 				
-				if (isRootRequired() && !Shell.isRootShellOpen())
+				if (isRootRequired() && !RootTools.isAccessGiven())
 				{
 					Logger.errorST("Root shell isn't started, cannot clean items");
 					
@@ -204,7 +205,7 @@ public class Cleaner
 	{
 		CleanResults results = new CleanResults();
 		
-		if (isRootRequired() && !Shell.isRootShellOpen())
+		if (isRootRequired() && !RootTools.isAccessGiven())
 		{
 			Logger.errorST("Root shell isn't started, cannot clean items");
 			

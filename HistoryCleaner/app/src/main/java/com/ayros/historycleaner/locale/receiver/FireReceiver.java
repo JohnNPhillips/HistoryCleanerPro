@@ -32,7 +32,7 @@ import com.ayros.historycleaner.cleaning.ProfileList;
 import com.ayros.historycleaner.locale.Constants;
 import com.ayros.historycleaner.locale.bundle.BundleScrubber;
 import com.ayros.historycleaner.locale.bundle.PluginBundleManager;
-import com.stericson.RootTools.execution.Shell;
+import com.stericson.RootShell.execution.Shell;
 
 /**
  * This is the "fire" BroadcastReceiver for a Locale Plug-in setting.

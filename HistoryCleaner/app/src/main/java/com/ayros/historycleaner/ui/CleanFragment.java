@@ -34,9 +34,11 @@ import com.ayros.historycleaner.cleaning.Cleaner.CleanResults;
 import com.ayros.historycleaner.cleaning.Profile;
 import com.ayros.historycleaner.cleaning.ProfileList;
 import com.ayros.historycleaner.helpers.Logger;
+import com.ayros.historycleaner.helpers.RootHelper;
+import com.stericson.RootShell.RootShell;
 import com.stericson.RootTools.RootTools;
-import com.stericson.RootTools.exceptions.RootDeniedException;
-import com.stericson.RootTools.execution.Shell;
+import com.stericson.RootShell.exceptions.RootDeniedException;
+import com.stericson.RootShell.execution.Shell;
 
 public class CleanFragment extends Fragment implements OnClickListener, OnProfileUpdated
 {
@@ -225,32 +227,14 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 				return;
 			}
 
-			if (!Shell.isRootShellOpen())
+			if (!RootTools.isAccessGiven())
 			{
-				try
-				{
-					Shell.startRootShell();
+				Toast.makeText(getActivity(), "Error: Could not obtain root access! This app requires root!", Toast.LENGTH_LONG).show();
+				Logger.errorST("Root access denied");
+				if (exitOnFinish) {
+					getActivity().finish();
 				}
-				catch (RootDeniedException rde)
-				{
-					Toast.makeText(getActivity(), "Error: Could not obtain root access! This app requires root!", Toast.LENGTH_LONG).show();
-					Logger.errorST("Root access denied", rde);
-					if (exitOnFinish)
-					{
-						getActivity().finish();
-					}
-					return;
-				}
-				catch (Exception e)
-				{
-					Toast.makeText(getActivity(), "Error: There was a problem when trying to gain root access", Toast.LENGTH_LONG).show();
-					Logger.errorST("Problem starting root shell", e);
-					if (exitOnFinish)
-					{
-						getActivity().finish();
-					}
-					return;
-				}
+				return;
 			}
 		}
 

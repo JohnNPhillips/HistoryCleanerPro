@@ -6,9 +6,8 @@ import java.util.List;
 
 import com.ayros.historycleaner.Globals;
 import com.stericson.RootTools.RootTools;
-import com.stericson.RootTools.execution.Command;
-import com.stericson.RootTools.execution.CommandCapture;
-import com.stericson.RootTools.execution.Shell;
+import com.stericson.RootShell.execution.Command;
+import com.stericson.RootShell.execution.Shell;
 
 public class RootHelper
 {
@@ -16,11 +15,11 @@ public class RootHelper
 	{
 		Logger.debug("Run&Wait: " + cmd);
 
-		CommandCapture cc = new CommandCapture(0, false, cmd);
+		CommandCapture cc = new CommandCapture(0, cmd);
 
 		try
 		{
-			Shell.runRootCommand(cc);
+			RootTools.getShell(true).runRootCommand(cc);
 		}
 		catch (Exception e)
 		{

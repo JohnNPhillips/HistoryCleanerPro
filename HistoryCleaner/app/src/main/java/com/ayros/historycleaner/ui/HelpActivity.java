@@ -19,6 +19,6 @@ public class HelpActivity extends Activity
 		WebView wv = (WebView)findViewById(R.id.help_webview);
 		wv.getSettings().setJavaScriptEnabled(true);
 		
-        wv.loadUrl("file:///android_asset/www/help.html");   // now it will not fail here
+        wv.loadUrl("file:///android_asset/www/help.html");
 	}
 }

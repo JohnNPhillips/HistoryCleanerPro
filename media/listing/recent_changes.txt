@@ -1,5 +1,6 @@
 4.0.0
 - Numerous internal changes, please report any issues!
+- App now requires Android 4.0
 - Fixed Dictionary.com cleaning
 - Fixed problems with missing BusyBox
 

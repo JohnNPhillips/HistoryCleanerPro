@@ -3,8 +3,10 @@ package com.ayros.historycleaner.cleaning.items.firefox;
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.cleaning.SimpleFileItem;
+import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FirefoxFileItem extends CleanItemStub
@@ -39,6 +41,13 @@ public class FirefoxFileItem extends CleanItemStub
 	{
 		String path = FirefoxUtils.getFirefoxDataPath(getPackageName());
 
-		RootHelper.deleteFileOrFolder(path + clearFile);
+		try
+		{
+			RootHelper.deleteFileOrFolder(path + clearFile);
+		}
+		catch (FileNotFoundException e)
+		{
+			Logger.debug("SimpleFileItem not found: " + clearFile + " (most likely already deleted");
+		}
 	}
 }

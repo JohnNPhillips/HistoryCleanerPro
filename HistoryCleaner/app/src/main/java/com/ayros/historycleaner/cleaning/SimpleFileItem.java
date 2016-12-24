@@ -1,8 +1,10 @@
 package com.ayros.historycleaner.cleaning;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
 public class SimpleFileItem extends CleanItemStub
@@ -54,8 +56,15 @@ public class SimpleFileItem extends CleanItemStub
 			{
 				file = getDataPath() + file;
 			}
-			
-			RootHelper.deleteFileOrFolder(file);
+
+			try
+			{
+				RootHelper.deleteFileOrFolder(file);
+			}
+			catch (FileNotFoundException e)
+			{
+				Logger.debug("SimpleFileItem not found: " + file + " (most likely the app was already cleaned");
+			}
 		}
 	}
 }

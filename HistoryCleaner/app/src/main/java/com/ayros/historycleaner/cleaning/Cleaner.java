@@ -1,6 +1,5 @@
 package com.ayros.historycleaner.cleaning;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import android.app.Activity;
 
 import com.ayros.historycleaner.UIRunner;
 import com.ayros.historycleaner.helpers.Logger;
-import com.stericson.RootShell.execution.Shell;
 import com.stericson.RootTools.RootTools;
 
 public class Cleaner
@@ -43,11 +41,11 @@ public class Cleaner
 	
 	public class CleanProgressEvent
 	{
-		public CleanItem item = null;
+		public CleanItemStub item = null;
 		public int itemIndex = 0;
 		public int totalItems = 0;
 		
-		public CleanProgressEvent(CleanItem item, int itemIndex, int totalItems)
+		public CleanProgressEvent(CleanItemStub item, int itemIndex, int totalItems)
 		{
 			this.item = item;
 			this.itemIndex = itemIndex;
@@ -55,12 +53,12 @@ public class Cleaner
 		}
 	}
 	
-	private List<CleanItem> cleanList;
+	private List<CleanItemStub> cleanList;
 	private boolean cleanResult;
 	
-	public Cleaner(List<CleanItem> itemList)
+	public Cleaner(List<CleanItemStub> itemList)
 	{
-		cleanList = new ArrayList<CleanItem>(itemList);
+		cleanList = new ArrayList<CleanItemStub>(itemList);
 	}
 	
 	/**
@@ -84,7 +82,7 @@ public class Cleaner
 				{
 					Logger.errorST("Root shell isn't started, cannot clean items");
 					
-					for (CleanItem item : cleanList)
+					for (CleanItemStub item : cleanList)
 					{
 						results.failure.add(item.getUniqueName());
 					}
@@ -94,7 +92,7 @@ public class Cleaner
 				{
 					for (int i = 0; i < cleanList.size(); i++)
 					{
-						CleanItem item = cleanList.get(i);
+						CleanItemStub item = cleanList.get(i);
 						
 						Logger.debug("About to clean item: " + item.getUniqueName());
 						
@@ -132,12 +130,12 @@ public class Cleaner
 								{
 									try
 									{
-										((CleanItem)data).clean();
+										((CleanItemStub)data).clean();
 										Cleaner.this.cleanResult = true;
 									}
 									catch (Exception e)
 									{
-										Logger.errorST("Exception cleaning item " + ((CleanItem)data).getUniqueName(), e);
+										Logger.errorST("Exception cleaning item " + ((CleanItemStub)data).getUniqueName(), e);
 										Cleaner.this.cleanResult = false;
 									}
 								}
@@ -212,7 +210,7 @@ public class Cleaner
 		{
 			Logger.errorST("Root shell isn't started, cannot clean items");
 			
-			for (CleanItem item : cleanList)
+			for (CleanItemStub item : cleanList)
 			{
 				results.failure.add(item.getUniqueName());
 			}
@@ -221,7 +219,7 @@ public class Cleaner
 		{
 			for (int i = 0; i < cleanList.size(); i++)
 			{
-				CleanItem item = cleanList.get(i);
+				CleanItemStub item = cleanList.get(i);
 				
 				if (cl != null)
 				{
@@ -253,7 +251,7 @@ public class Cleaner
 	
 	public boolean isRootRequired()
 	{
-		for (CleanItem item : cleanList)
+		for (CleanItemStub item : cleanList)
 		{
 			if (item.isRootRequired())
 			{

@@ -2,7 +2,7 @@ package com.ayros.historycleaner;
 
 import android.content.Context;
 
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.Logger;
 import com.stericson.RootShell.RootShell;
 import com.stericson.RootShell.exceptions.RootDeniedException;
@@ -17,7 +17,7 @@ public class Globals
 	public static String saveProfileText = "";
 
 	// -> DataViewActivity
-	public static CleanItem itemDataView = null;
+	public static CleanItemStub itemDataView = null;
 
 	private static Shell rootShell = null;
 	

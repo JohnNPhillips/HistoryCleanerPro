@@ -1,17 +1,13 @@
 package com.ayros.historycleaner.cleaning.items.firefox;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.DBHelper;
-import com.ayros.historycleaner.helpers.Logger;
-import com.ayros.historycleaner.helpers.RootHelper;
 
-public class _FirefoxNightly_History extends CleanItem
+public class _FirefoxNightly_History extends CleanItemStub
 {
 	public _FirefoxNightly_History(Category parent)
 	{

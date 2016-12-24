@@ -1,14 +1,13 @@
 package com.ayros.historycleaner.cleaning.items;
 
-import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.DBHelper;
 import com.ayros.historycleaner.helpers.RootHelper;
 
 import java.io.IOException;
 
-public class _ONEBrowser_Cache extends CleanItem
+public class _ONEBrowser_Cache extends CleanItemStub
 {
 	public _ONEBrowser_Cache(Category parent)
 	{

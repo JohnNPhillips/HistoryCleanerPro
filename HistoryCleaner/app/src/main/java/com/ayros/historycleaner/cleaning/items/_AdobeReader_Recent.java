@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.PrefsModifier;
 import com.ayros.historycleaner.helpers.RootHelper;
-import com.stericson.RootTools.RootTools;
 
-public class _AdobeReader_Recent extends CleanItem
+public class _AdobeReader_Recent extends CleanItemStub
 {
 	public _AdobeReader_Recent(Category parent)
 	{

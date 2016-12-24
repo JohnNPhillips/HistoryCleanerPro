@@ -10,10 +10,10 @@ import android.text.ClipboardManager;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.R;
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 
 @SuppressWarnings("deprecation")
-public class _System_Clipboard extends CleanItem
+public class _System_Clipboard extends CleanItemStub
 {
 	public _System_Clipboard(Category parent)
 	{
@@ -31,7 +31,13 @@ public class _System_Clipboard extends CleanItem
 	{
 		return Globals.getContext().getResources().getDrawable(R.drawable.system_clipboard);
 	}
-	
+
+	@Override
+	public String getPackageName()
+	{
+		return "";
+	}
+
 	@Override
 	public boolean isApplicable()
 	{

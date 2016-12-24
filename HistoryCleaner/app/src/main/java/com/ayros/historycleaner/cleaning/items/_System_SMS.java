@@ -5,12 +5,12 @@ import android.os.Build;
 
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.Logger;
 
 import java.io.IOException;
 
-public class _System_SMS extends CleanItem
+public class _System_SMS extends CleanItemStub
 {
 	public _System_SMS(Category parent)
 	{

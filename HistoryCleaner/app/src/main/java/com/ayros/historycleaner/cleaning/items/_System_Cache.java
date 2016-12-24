@@ -9,9 +9,9 @@ import android.graphics.drawable.Drawable;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.R;
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 
-public class _System_Cache extends CleanItem
+public class _System_Cache extends CleanItemStub
 {
 	public _System_Cache(Category parent)
 	{
@@ -28,6 +28,12 @@ public class _System_Cache extends CleanItem
 	public Drawable getIcon()
 	{
 		return Globals.getContext().getResources().getDrawable(R.drawable.system_cache);
+	}
+
+	@Override
+	public String getPackageName()
+	{
+		return "";
 	}
 
 	@Override

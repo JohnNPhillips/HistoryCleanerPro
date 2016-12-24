@@ -27,18 +27,14 @@ import android.widget.Toast;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.R;
 import com.ayros.historycleaner.cleaning.CategoryList;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.cleaning.CleanListener;
 import com.ayros.historycleaner.cleaning.Cleaner;
 import com.ayros.historycleaner.cleaning.Cleaner.CleanResults;
 import com.ayros.historycleaner.cleaning.Profile;
 import com.ayros.historycleaner.cleaning.ProfileList;
 import com.ayros.historycleaner.helpers.Logger;
-import com.ayros.historycleaner.helpers.RootHelper;
-import com.stericson.RootShell.RootShell;
 import com.stericson.RootTools.RootTools;
-import com.stericson.RootShell.exceptions.RootDeniedException;
-import com.stericson.RootShell.execution.Shell;
 
 public class CleanFragment extends Fragment implements OnClickListener, OnProfileUpdated
 {
@@ -332,7 +328,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		{
 			int itemId = item.getItemId();
 
-			CleanItem ci = catList.getItemByUniqueId(itemId);
+			CleanItemStub ci = catList.getItemByUniqueId(itemId);
 			if (ci != null)
 			{
 				Globals.itemDataView = ci;
@@ -360,7 +356,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		List<CleanItem> items;
+		List<CleanItemStub> items;
 		switch (item.getItemId())
 		{
 			case R.id.clean_menu_save_as_profile:
@@ -369,7 +365,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 			case R.id.clean_menu_select_all:
 				items = catList.getAllItems(false);
-				for (CleanItem ci : items)
+				for (CleanItemStub ci : items)
 				{
 					// Only check item if there is no warning message (don't accidently clean something sensitive)
 					if (ci.getWarningMessage() == null)
@@ -381,7 +377,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 			case R.id.clean_menu_select_none:
 				items = catList.getAllItems(false);
-				for (CleanItem ci : items)
+				for (CleanItemStub ci : items)
 				{
 					ci.setChecked(false);
 				}

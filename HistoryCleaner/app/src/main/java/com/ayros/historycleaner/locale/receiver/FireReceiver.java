@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.CategoryList;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.cleaning.Cleaner;
 import com.ayros.historycleaner.cleaning.Profile;
 import com.ayros.historycleaner.cleaning.ProfileList;
@@ -92,7 +92,7 @@ public final class FireReceiver extends BroadcastReceiver
 				Toast.makeText(context, "Cleaning profile " + profileName, Toast.LENGTH_LONG).show();
 
 				CategoryList catList = new CategoryList();
-				List<CleanItem> cleanItems = catList.getProfileItems(profile);
+				List<CleanItemStub> cleanItems = catList.getProfileItems(profile);
 				Cleaner cleaner = new Cleaner(cleanItems);
 
 				if (cleaner.isRootRequired())

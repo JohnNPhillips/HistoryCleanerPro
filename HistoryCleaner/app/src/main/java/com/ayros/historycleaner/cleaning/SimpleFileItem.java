@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.ayros.historycleaner.helpers.RootHelper;
 
-public class SimpleFileItem extends CleanItem
+public class SimpleFileItem extends CleanItemStub
 {
 	String displayName;
 	String packageName;

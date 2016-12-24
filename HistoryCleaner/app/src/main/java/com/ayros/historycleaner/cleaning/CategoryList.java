@@ -672,7 +672,7 @@ public class CategoryList
 		for (int i = cats.size() - 1; i >= 0; i--)
 		{
 			cat = cats.get(i);
-			List<CleanItem> items = cat.getItems();
+			List<CleanItemStub> items = cat.getItems();
 			for (int z = items.size() - 1; z >= 0; z--)
 			{
 				if (!items.get(z).isApplicable())
@@ -694,13 +694,13 @@ public class CategoryList
 	 * @param p
 	 * @return
 	 */
-	public List<CleanItem> getProfileItems(Profile profile)
+	public List<CleanItemStub> getProfileItems(Profile profile)
 	{
-		List<CleanItem> items = new ArrayList<CleanItem>();
+		List<CleanItemStub> items = new ArrayList<CleanItemStub>();
 		
 		for (String itemName : profile.getItemNames())
 		{
-			CleanItem item = getItemByUniqueName(itemName);
+			CleanItemStub item = getItemByUniqueName(itemName);
 			
 			if (item != null)
 			{
@@ -711,9 +711,9 @@ public class CategoryList
 		return items;
 	}
 	
-	public CleanItem getItemByView(View v)
+	public CleanItemStub getItemByView(View v)
 	{
-		for (CleanItem item : getAllItems(false))
+		for (CleanItemStub item : getAllItems(false))
 		{
 			ViewGroup itemView = item.getView();
 			View nameView = itemView.findViewById(R.id.item_name);
@@ -727,9 +727,9 @@ public class CategoryList
 		return null;
 	}
 	
-	public CleanItem getItemByUniqueId(int uniqueId)
+	public CleanItemStub getItemByUniqueId(int uniqueId)
 	{
-		for (CleanItem ci : getAllItems(false))
+		for (CleanItemStub ci : getAllItems(false))
 		{
 			if (ci.getUniqueId() == uniqueId)
 			{
@@ -740,9 +740,9 @@ public class CategoryList
 		return null;
 	}
 	
-	public CleanItem getItemByUniqueName(String uniqueName)
+	public CleanItemStub getItemByUniqueName(String uniqueName)
 	{
-		for (CleanItem ci : getAllItems(false))
+		for (CleanItemStub ci : getAllItems(false))
 		{
 			if (ci.getUniqueName().equals(uniqueName))
 			{
@@ -753,12 +753,12 @@ public class CategoryList
 		return null;
 	}
 	
-	public List<CleanItem> getAllItems(boolean enabledOnly)
+	public List<CleanItemStub> getAllItems(boolean enabledOnly)
 	{
-		List<CleanItem> items = new ArrayList<CleanItem>();
+		List<CleanItemStub> items = new ArrayList<CleanItemStub>();
 		for (Category cat : cats)
 		{
-			for (CleanItem item : cat.getItems())
+			for (CleanItemStub item : cat.getItems())
 			{
 				if (!enabledOnly || item.isChecked())
 				{
@@ -774,8 +774,8 @@ public class CategoryList
 	{
 		if (p != null)
 		{
-			List<CleanItem> items = getAllItems(false);
-			for (CleanItem item : items)
+			List<CleanItemStub> items = getAllItems(false);
+			for (CleanItemStub item : items)
 			{
 				item.setChecked(p.isSelected(item) && item.isApplicable());
 			}
@@ -798,7 +798,7 @@ public class CategoryList
 	
 	public void registerContextMenu(Fragment f)
 	{
-		for (CleanItem item : getAllItems(false))
+		for (CleanItemStub item : getAllItems(false))
 		{
 			ViewGroup itemView = item.getView();
 			
@@ -815,7 +815,7 @@ public class CategoryList
 		if (p != null)
 		{
 			p.selectedItems.clear();
-			for (CleanItem ci : getAllItems(true))
+			for (CleanItemStub ci : getAllItems(true))
 			{
 				p.selectedItems.add(ci.getUniqueName());
 			}

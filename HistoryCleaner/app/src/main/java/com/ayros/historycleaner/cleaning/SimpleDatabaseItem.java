@@ -7,13 +7,11 @@ import java.util.List;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.database.DatabaseTest;
 import com.ayros.historycleaner.helpers.DBHelper;
-import com.ayros.historycleaner.helpers.database.QueryResult;
 import com.ayros.historycleaner.helpers.database.RootDatabase;
 import com.google.common.collect.Lists;
-import com.stericson.RootShell.RootShell;
 import com.stericson.RootTools.RootTools;
 
-public class SimpleDatabaseItem extends CleanItem
+public class SimpleDatabaseItem extends CleanItemStub
 {
 	public static class DBQuery
 	{

@@ -1,14 +1,13 @@
 package com.ayros.historycleaner.cleaning.items.firefox;
 
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
-import com.ayros.historycleaner.helpers.Logger;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.RootHelper;
 import com.stericson.RootTools.RootTools;
 
 import java.io.IOException;
 
-public class _FirefoxNightly_LocalStorage extends CleanItem
+public class _FirefoxNightly_LocalStorage extends CleanItemStub
 {
 	public _FirefoxNightly_LocalStorage(Category parent)
 	{

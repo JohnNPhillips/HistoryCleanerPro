@@ -4,11 +4,11 @@ import android.content.pm.PackageManager;
 
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 
 import java.io.IOException;
 
-public class _System_Calls extends CleanItem
+public class _System_Calls extends CleanItemStub
 {
 	String display;
 	int type;

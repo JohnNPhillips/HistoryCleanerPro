@@ -9,11 +9,11 @@ import android.os.Build;
 
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
-import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.DBHelper;
 import com.stericson.RootTools.RootTools;
 
-public class _System_FrequentContacts extends CleanItem
+public class _System_FrequentContacts extends CleanItemStub
 {
 	public _System_FrequentContacts(Category parent)
 	{

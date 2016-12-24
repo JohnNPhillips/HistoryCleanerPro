@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ayros.historycleaner.Globals;
+import com.ayros.historycleaner.cleaning.database.DatabaseTest;
 import com.ayros.historycleaner.helpers.DBHelper;
 import com.ayros.historycleaner.helpers.database.QueryResult;
 import com.ayros.historycleaner.helpers.database.RootDatabase;
@@ -50,8 +51,9 @@ public class SimpleDatabaseItem extends CleanItem
 	String dbFile;
 	DBQuery dbQuery;
 	String[] cleanQueries;
+	List<DatabaseTest> cleanPreconditions;
 
-	public SimpleDatabaseItem(Category parent, String displayName, String packageName, String dbFileRelative, DBQuery dbQuery, String[] cleanQueries)
+	public SimpleDatabaseItem(Category parent, String displayName, String packageName, String dbFileRelative, DBQuery dbQuery, String[] cleanQueries, List<DatabaseTest> cleanPreconditions)
 	{
 		super(parent);
 
@@ -60,6 +62,12 @@ public class SimpleDatabaseItem extends CleanItem
 		this.dbFile = getDataPath() + dbFileRelative;
 		this.dbQuery = dbQuery;
 		this.cleanQueries = cleanQueries;
+		this.cleanPreconditions = cleanPreconditions;
+	}
+
+	public SimpleDatabaseItem(Category parent, String displayName, String packageName, String dbFileRelative, DBQuery dbQuery, String[] cleanQueries)
+	{
+		this(parent, displayName, packageName, dbFileRelative, dbQuery, cleanQueries, Lists.<DatabaseTest>newArrayList());
 	}
 
 	@Override
@@ -81,13 +89,22 @@ public class SimpleDatabaseItem extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public boolean clean() throws IOException
 	{
 		if (!RootTools.exists(dbFile))
 		{
 			return true;
 		}
 
-		return DBHelper.updateDatabase(Globals.getContext(), dbFile, cleanQueries);
+		RootDatabase db = new RootDatabase(dbFile, Globals.getRootShell());
+		for (DatabaseTest precondition : cleanPreconditions)
+		{
+			if (!precondition.passes(db))
+			{
+				return false;
+			}
+		}
+
+		return DBHelper.updateDatabase(dbFile, cleanQueries);
 	}
 }

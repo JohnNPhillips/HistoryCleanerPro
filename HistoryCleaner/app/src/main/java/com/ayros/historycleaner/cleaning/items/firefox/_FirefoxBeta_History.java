@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning.items.firefox;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +86,7 @@ public class _FirefoxBeta_History extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public boolean clean() throws IOException
 	{
 		String path = getFirefoxBetaDataPath();
 		if (path == null)
@@ -100,7 +101,6 @@ public class _FirefoxBeta_History extends CleanItem
 
 		return DBHelper.updateDatabase
 		(
-			Globals.getContext(),
 			path + "/browser.db",
 			new String[]
 			{

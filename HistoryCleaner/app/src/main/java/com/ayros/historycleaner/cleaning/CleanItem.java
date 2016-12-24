@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning;
 
+import java.io.IOException;
 import java.util.List;
 
 import android.app.ActivityManager;
@@ -30,7 +31,7 @@ public abstract class CleanItem
 	}
 
 	// Override
-	public boolean clean()
+	public boolean clean() throws IOException
 	{
 		return false;
 	}

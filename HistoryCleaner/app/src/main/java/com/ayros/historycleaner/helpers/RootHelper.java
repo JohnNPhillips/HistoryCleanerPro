@@ -14,7 +14,12 @@ import com.stericson.RootShell.execution.Shell;
 
 public class RootHelper
 {
-	public static String runAndWait(String cmd, Shell shell) throws IOException
+	public static ExecutionResult runAndWait(String cmd, Shell shell) throws IOException
+	{
+		return runAndWait(cmd, shell, true);
+	}
+
+	public static ExecutionResult runAndWait(String cmd, Shell shell, boolean exceptionOnFailure) throws IOException
 	{
 		Logger.debug("Run&Wait: " + cmd);
 
@@ -23,10 +28,15 @@ public class RootHelper
 
 		if (!waitForCommand(cc))
 		{
-			return null;
+			throw new IOException(String.format("Error waiting for command to finish executing {%s}", cmd));
 		}
 
-		return cc.toString();
+		if (exceptionOnFailure && cc.getExitCode() != 0)
+		{
+			throw new IOException(String.format("Unsuccessful exit code (%d) when executing command {%s}", cc.getExitCode(), cmd));
+		}
+
+		return new ExecutionResult(cc.toString(), cc.getExitCode());
 	}
 
 	public static String runAndWait(String cmd)

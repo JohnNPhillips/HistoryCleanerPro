@@ -39,29 +39,24 @@ public class DBHelper
 		return queryOutput;
 	}
 
-	public static boolean updateDatabase(Context c, String db, String[] queries)
+	public static boolean updateDatabase(String dbPath, String[] queries) throws IOException
 	{
-		DatabaseModifier dm = new DatabaseModifier(c, db);
-		if (!dm.open())
-		{
-			Logger.errorST("Could not update database {" + db + "}");
-			dm.clean();
-			return false;
-		}
+		return updateDatabase(dbPath, Lists.newArrayList(queries));
+	}
 
-		for (String q : queries)
+	public static boolean updateDatabase(String dbPath, List<String> queries) throws IOException
+	{
+		RootDatabase db = new RootDatabase(dbPath, Globals.getRootShell());
+
+		for (String query : queries)
 		{
-			if (!dm.exec(q))
+			if (!db.runCommand(query))
 			{
-				Logger.errorST("Could not execute query {" + q + "} on database {" + db + "}");
-				dm.clean();
+				Logger.errorST("Could not execute query {" + query + "} on database {" + dbPath + "}");
 				return false;
 			}
 		}
 
-		boolean result = dm.saveChanges();
-		dm.clean();
-
-		return result;
+		return true;
 	}
 }

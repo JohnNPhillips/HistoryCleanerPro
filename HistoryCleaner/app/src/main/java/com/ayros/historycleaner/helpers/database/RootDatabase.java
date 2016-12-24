@@ -11,8 +11,9 @@ import java.util.List;
 
 public class RootDatabase
 {
-	String path;
-	Shell shell;
+	private final String path;
+	private final Shell shell;
+	private List<String> cachedTables;
 
 	public RootDatabase(String path, Shell shell)
 	{
@@ -20,14 +21,21 @@ public class RootDatabase
 		this.shell = shell;
 	}
 
-	public List<String> listTables() throws IOException
+	public List<String> listTables(boolean readCached) throws IOException
 	{
+		if (readCached && cachedTables != null)
+		{
+			return cachedTables;
+		}
+
 		List<String> tables = Lists.newArrayList(executeSQLCommand(".tables").split("[ \t]"));
 		for (int i = 0; i < tables.size(); i++)
 		{
 			tables.set(i, tables.get(i).trim());
 		}
 		tables.removeAll(Collections.singleton(""));
+
+		cachedTables = tables;
 		return tables;
 	}
 
@@ -46,16 +54,23 @@ public class RootDatabase
 		return QueryResult.parseSqliteCSV(columns, csvOutput);
 	}
 
+	public boolean runCommand(String command) throws IOException
+	{
+		String rootCommand = String.format("sqlite3 %s \"%s\"", path, command);
+
+		return RootHelper.runAndWait(rootCommand, shell).isSuccess();
+	}
+
 	public boolean tableExists(String tableName) throws IOException
 	{
-		return listTables().contains(tableName);
+		return listTables(true).contains(tableName);
 	}
 
 	private String executeSQLCommand(String command, String extraArgs) throws IOException
 	{
 		String rootCommand = String.format("sqlite3 %s %s \"%s\"", extraArgs, path, command);
 
-		return RootHelper.runAndWait(rootCommand, shell).trim();
+		return RootHelper.runAndWait(rootCommand, shell).getOutput().trim();
 	}
 
 	private String executeSQLCommand(String command) throws IOException

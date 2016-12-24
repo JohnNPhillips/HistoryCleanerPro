@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning.items.firefox;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class _FirefoxNightly_Cookies extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public boolean clean() throws IOException
 	{
 		String path = _FirefoxNightly_History.getFirefoxNightlyDataPath();
 		if (path == null)
@@ -68,7 +69,6 @@ public class _FirefoxNightly_Cookies extends CleanItem
 
 		return DBHelper.updateDatabase
 		(
-			Globals.getContext(),
 			path + "/cookies.sqlite",
 			new String[]
 			{

@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning.items;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class _System_FrequentContacts extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public boolean clean() throws IOException
 	{
 		if (!RootTools.exists("/data/data/com.android.providers.contacts/databases/contacts2.db"))
 		{
@@ -72,7 +73,6 @@ public class _System_FrequentContacts extends CleanItem
 
 		return DBHelper.updateDatabase
 		(
-			Globals.getContext(),
 			"/data/data/com.android.providers.contacts/databases/contacts2.db",
 			new String[]
 			{

@@ -35,7 +35,7 @@ public class Globals
 
 	public static Shell getRootShell()
 	{
-		if (rootShell == null)
+		if (rootShell == null || rootShell.isClosed)
 		{
 			try
 			{
@@ -43,7 +43,7 @@ public class Globals
 			}
 			catch (TimeoutException | IOException | RootDeniedException e)
 			{
-				Logger.errorST("Could not get root acces", e);
+				Logger.errorST("Could not get root access", e);
 			}
 		}
 		return rootShell;

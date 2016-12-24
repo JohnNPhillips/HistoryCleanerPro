@@ -44,7 +44,6 @@ public class _Firefox_Cookies extends CleanItem
 
 		return DBHelper.queryDatabase
 		(
-			Globals.getContext(),
 			path + "/cookies.sqlite",
 			new String[] { "Domain", "Cookie Name", "Cookie Value" },
 			"moz_cookies",

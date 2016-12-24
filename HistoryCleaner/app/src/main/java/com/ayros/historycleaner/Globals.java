@@ -3,6 +3,13 @@ package com.ayros.historycleaner;
 import android.content.Context;
 
 import com.ayros.historycleaner.cleaning.CleanItem;
+import com.ayros.historycleaner.helpers.Logger;
+import com.stericson.RootShell.RootShell;
+import com.stericson.RootShell.exceptions.RootDeniedException;
+import com.stericson.RootShell.execution.Shell;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 public class Globals
 {
@@ -11,6 +18,8 @@ public class Globals
 
 	// -> DataViewActivity
 	public static CleanItem itemDataView = null;
+
+	private static Shell rootShell = null;
 	
 	private static Context context = null;
 	
@@ -22,5 +31,21 @@ public class Globals
 	public static Context getContext()
 	{
 		return context;
+	}
+
+	public static Shell getRootShell()
+	{
+		if (rootShell == null)
+		{
+			try
+			{
+				rootShell = RootShell.getShell(true);
+			}
+			catch (TimeoutException | IOException | RootDeniedException e)
+			{
+				Logger.errorST("Could not get root acces", e);
+			}
+		}
+		return rootShell;
 	}
 }

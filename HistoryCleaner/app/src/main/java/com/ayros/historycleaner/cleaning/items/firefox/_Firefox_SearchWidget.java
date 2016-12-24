@@ -44,7 +44,6 @@ public class _Firefox_SearchWidget extends CleanItem
 
 		return DBHelper.queryDatabase
 		(
-			Globals.getContext(),
 			path + "/browser.db",
 			new String[] { "Search Query", "Timestamp" },
 			"searchhistory",

@@ -54,7 +54,6 @@ public class _System_FrequentContacts extends CleanItem
 
 		return DBHelper.queryDatabase
 		(
-			Globals.getContext(),
 			"/data/data/com.android.providers.contacts/databases/contacts2.db",
 			new String[] { "Name", "Times Contacted" },
 			"raw_contacts",

@@ -76,7 +76,6 @@ public class _Firefox_History extends CleanItem
 
 		return DBHelper.queryDatabase
 		(
-			Globals.getContext(),
 			path + "/browser.db",
 			new String[] { "Title", "URL" },
 			"history",

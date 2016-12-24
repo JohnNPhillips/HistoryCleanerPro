@@ -1,16 +1,34 @@
 package com.ayros.historycleaner.helpers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import com.ayros.historycleaner.Globals;
+import com.stericson.RootShell.exceptions.RootDeniedException;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootShell.execution.Command;
 import com.stericson.RootShell.execution.Shell;
 
 public class RootHelper
 {
+	public static String runAndWait(String cmd, Shell shell) throws IOException
+	{
+		Logger.debug("Run&Wait: " + cmd);
+
+		CommandCapture cc = new CommandCapture(0, cmd);
+		shell.add(cc);
+
+		if (!waitForCommand(cc))
+		{
+			return null;
+		}
+
+		return cc.toString();
+	}
+
 	public static String runAndWait(String cmd)
 	{
 		Logger.debug("Run&Wait: " + cmd);
@@ -46,7 +64,7 @@ public class RootHelper
 				{
 					if (!cmd.isFinished())
 					{
-						cmd.wait(2000);
+						cmd.wait(100);
 					}
 				}
 				catch (InterruptedException e)

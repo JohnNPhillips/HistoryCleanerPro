@@ -5,6 +5,10 @@ import com.ayros.historycleaner.helpers.RootHelper;
 import java.io.IOException;
 
 public class FirefoxUtils {
+    public static final String FIREFOX_PACKAGE = "org.mozilla.firefox";
+    public static final String FIREFOX_BETA_PACKAGE = "org.mozilla.firefox_beta";
+    public static final String FIREFOX_NIGHTLY_PACKAGE = "org.mozilla.fennec";
+
     public static String getFirefoxDataPath(String packageName) throws IOException
     {
         String profiles = RootHelper.getFileContents("/data/data/" + packageName + "/files/mozilla/profiles.ini");

@@ -46,7 +46,7 @@ public class SimpleDatabaseItem extends CleanItemStub
 
 	String displayName;
 	String packageName;
-	String dbFile;
+	String dbFileRelative;
 	DBQuery dbQuery;
 	String[] cleanQueries;
 	List<DatabaseTest> cleanPreconditions;
@@ -57,7 +57,7 @@ public class SimpleDatabaseItem extends CleanItemStub
 
 		this.displayName = displayName;
 		this.packageName = packageName;
-		this.dbFile = getDataPath() + dbFileRelative;
+		this.dbFileRelative = dbFileRelative;
 		this.dbQuery = dbQuery;
 		this.cleanQueries = cleanQueries;
 		this.cleanPreconditions = cleanPreconditions;
@@ -66,6 +66,11 @@ public class SimpleDatabaseItem extends CleanItemStub
 	public SimpleDatabaseItem(Category parent, String displayName, String packageName, String dbFileRelative, DBQuery dbQuery, String[] cleanQueries)
 	{
 		this(parent, displayName, packageName, dbFileRelative, dbQuery, cleanQueries, Lists.<DatabaseTest>newArrayList());
+	}
+
+	public String getDatabaseFile() throws IOException
+	{
+		return getDataPath() + dbFileRelative;
 	}
 
 	@Override
@@ -81,20 +86,20 @@ public class SimpleDatabaseItem extends CleanItemStub
 	}
 
 	@Override
-	public List<String[]> getSavedData()
+	public List<String[]> getSavedData() throws IOException
 	{
-		return dbQuery.query(dbFile, true);
+		return dbQuery.query(getDatabaseFile(), true);
 	}
 
 	@Override
 	public void clean() throws IOException
 	{
-		if (!RootTools.exists(dbFile))
+		if (!RootTools.exists(getDatabaseFile()))
 		{
 			return;
 		}
 
-		RootDatabase db = new RootDatabase(dbFile, Globals.getRootShell());
+		RootDatabase db = new RootDatabase(getDatabaseFile(), Globals.getRootShell());
 		for (DatabaseTest precondition : cleanPreconditions)
 		{
 			if (!precondition.passes(db))
@@ -103,6 +108,6 @@ public class SimpleDatabaseItem extends CleanItemStub
 			}
 		}
 
-		DBHelper.updateDatabase(dbFile, cleanQueries);
+		DBHelper.updateDatabase(getDatabaseFile(), cleanQueries);
 	}
 }

@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,10 @@ import com.ayros.historycleaner.cleaning.items._System_Calls;
 import com.ayros.historycleaner.cleaning.items._System_Clipboard;
 import com.ayros.historycleaner.cleaning.items._System_FrequentContacts;
 import com.ayros.historycleaner.cleaning.items._System_SMS;
+import com.ayros.historycleaner.cleaning.items.firefox.FirefoxDatabaseItem;
+import com.ayros.historycleaner.cleaning.items.firefox.FirefoxFileItem;
+import com.ayros.historycleaner.cleaning.items.firefox.FirefoxUtils;
+import com.ayros.historycleaner.helpers.DBHelper;
 
 public class CategoryList
 {
@@ -342,42 +347,155 @@ public class CategoryList
 			new String[] { "DELETE FROM suggestions;" }
 		));
 		cats.add(cat);
-		
 
 		// -------------------
 		// ----- Firefox -----
 		// -------------------
 		cat = new Category("Firefox");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_Cache(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_Cookies(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_History(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_LocalStorage(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_OpenTabs(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._Firefox_SearchWidget(cat));
+		cat.addItem(new FirefoxFileItem(cat, "Cache", FirefoxUtils.FIREFOX_PACKAGE, "/Cache"));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "Cookies", FirefoxUtils.FIREFOX_PACKAGE, "/cookies.sqlite",
+			new DBQuery
+			(
+				new String[] { "Domain", "Cookie Name", "Cookie Value" },
+				"moz_cookies",
+				new String[] { "baseDomain", "name", "value" }
+			),
+			new String[] { "DELETE FROM moz_cookies;" }
+		));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "History", FirefoxUtils.FIREFOX_PACKAGE, "/browser.db",
+			new DBQuery
+			(
+				new String[]{"Title", "URL"},
+				"history",
+				new String[]{"title", "url"}
+			),
+			new String[]
+			{
+				"UPDATE sqlite_sequence SET seq='0' WHERE name='history';",
+				"DELETE FROM history;",
+			}
+		));
+		cat.addItem(new FirefoxFileItem(cat, "Local Storage", FirefoxUtils.FIREFOX_PACKAGE, "/webappsstore.sqlite*"));
+		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_PACKAGE, "/sessionstore.js"));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "Search Widget", FirefoxUtils.FIREFOX_PACKAGE, "/browser.db",
+			new DBQuery
+			(
+				new String[] { "Search Query", "Timestamp" },
+				"searchhistory",
+				new String[] { "query", "date" }
+			),
+			new String[]
+			{
+				"UPDATE sqlite_sequence SET seq='0' WHERE name='searchhistory';",
+				"DELETE FROM searchhistory;",
+			}
+		));
 		cats.add(cat);
 
 		// ------------------------
 		// ----- Firefox Beta -----
 		// ------------------------
 		cat = new Category("Firefox Beta");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_Cache(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_Cookies(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_History(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_LocalStorage(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_OpenTabs(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxBeta_SearchWidget(cat));
+		cat.addItem(new FirefoxFileItem(cat, "Cache", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/Cache"));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "Cookies", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/cookies.sqlite",
+			new DBQuery
+			(
+				new String[] { "Domain", "Cookie Name", "Cookie Value" },
+				"moz_cookies",
+				new String[] { "baseDomain", "name", "value" }
+			),
+			new String[] { "DELETE FROM moz_cookies;" }
+		));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "History", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/browser.db",
+			new DBQuery
+			(
+				new String[]{"Title", "URL"},
+				"history",
+				new String[]{"title", "url"}
+			),
+			new String[]
+			{
+				"UPDATE sqlite_sequence SET seq='0' WHERE name='history';",
+				"DELETE FROM history;",
+			}
+		));
+		cat.addItem(new FirefoxFileItem(cat, "Local Storage", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/webappsstore.sqlite*"));
+		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/sessionstore.js"));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "Search Widget", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/browser.db",
+			new DBQuery
+			(
+				new String[] { "Search Query", "Timestamp" },
+				"searchhistory",
+				new String[] { "query", "date" }
+			),
+			new String[]
+			{
+				"UPDATE sqlite_sequence SET seq='0' WHERE name='searchhistory';",
+				"DELETE FROM searchhistory;",
+			}
+		));
 		cats.add(cat);
 
 		// ---------------------------
 		// ----- Firefox Nightly -----
 		// ---------------------------
 		cat = new Category("Firefox Nightly");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_Cache(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_Cookies(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_History(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_LocalStorage(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_OpenTabs(cat));
-		cat.addItem(new com.ayros.historycleaner.cleaning.items.firefox._FirefoxNightly_SearchWidget(cat));
+		cat.addItem(new FirefoxFileItem(cat, "Cache", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/Cache"));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "Cookies", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/cookies.sqlite",
+			new DBQuery
+			(
+				new String[] { "Domain", "Cookie Name", "Cookie Value" },
+				"moz_cookies",
+				new String[] { "baseDomain", "name", "value" }
+			),
+			new String[] { "DELETE FROM moz_cookies;" }
+		));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "History", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/browser.db",
+			new DBQuery
+			(
+				new String[]{"Title", "URL"},
+				"history",
+				new String[]{"title", "url"}
+			),
+			new String[]
+			{
+				"UPDATE sqlite_sequence SET seq='0' WHERE name='history';",
+				"DELETE FROM history;",
+			}
+		));
+		cat.addItem(new FirefoxFileItem(cat, "Local Storage", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/webappsstore.sqlite*"));
+		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/sessionstore.js"));
+		cat.addItem(new FirefoxDatabaseItem
+		(
+			cat, "Search Widget", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/browser.db",
+			new DBQuery
+			(
+				new String[] { "Search Query", "Timestamp" },
+				"searchhistory",
+				new String[] { "query", "date" }
+			),
+			new String[]
+			{
+				"UPDATE sqlite_sequence SET seq='0' WHERE name='searchhistory';",
+				"DELETE FROM searchhistory;",
+			}
+		));
 		cats.add(cat);
 
 		// -----------------

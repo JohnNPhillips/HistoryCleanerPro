@@ -31,9 +31,9 @@ public abstract class CleanItem
 	}
 
 	// Override
-	public boolean clean() throws IOException
+	public void clean() throws IOException
 	{
-		return false;
+		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	public String getDataPath()
@@ -83,7 +83,7 @@ public abstract class CleanItem
 	}
 
 	// Override
-	public List<String[]> getSavedData()
+	public List<String[]> getSavedData() throws IOException
 	{
 		return null;
 	}

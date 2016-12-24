@@ -61,6 +61,12 @@ public class RootDatabase
 		return RootHelper.runAndWait(rootCommand, shell).isSuccess();
 	}
 
+	public boolean runCommandsAsTransaction(List<String> commands) throws IOException
+	{
+		String query = String.format("BEGIN TRANSACTION; %s COMMIT;", Joiner.on(" ").join(commands));
+
+		return runCommand(query);
+	}
 	public boolean tableExists(String tableName) throws IOException
 	{
 		return listTables(true).contains(tableName);

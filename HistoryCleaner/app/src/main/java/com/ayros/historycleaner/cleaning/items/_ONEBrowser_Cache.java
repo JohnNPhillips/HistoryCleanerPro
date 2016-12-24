@@ -28,14 +28,11 @@ public class _ONEBrowser_Cache extends CleanItem
 	}
 	
 	@Override
-	public boolean clean() throws IOException
+	public void clean() throws IOException
 	{
-		if (!RootHelper.deleteFileOrFolder(getDataPath() + "/cache/*", false))
-		{
-			return false;
-		}
+		RootHelper.deleteFileOrFolder(getDataPath() + "/cache/*");
 		
-		return DBHelper.updateDatabase
+		DBHelper.updateDatabase
 		(
 			getDataPath() + "/databases/webviewCache_x5.db",
 			new String[]

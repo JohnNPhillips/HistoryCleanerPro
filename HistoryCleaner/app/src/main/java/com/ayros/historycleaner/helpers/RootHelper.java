@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.helpers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -173,19 +174,21 @@ public class RootHelper
 		return data;
 	}
 
-	public static boolean deleteFileOrFolder(String path, boolean failOnNonexistant)
+	public static void deleteFileOrFolder(String path) throws IOException
 	{
 		Logger.debug("Deleting File: " + path);
 
 		if (!path.contains("*") && !fileOrFolderExists(path))
 		{
-			Logger.debug("File doesn't exist - failOnNonexistant: " + failOnNonexistant);
-			return !failOnNonexistant;
+			throw new FileNotFoundException("File/folder not found: " + path);
 		}
 
 		// Escape spaces
 		path = path.replace(" ", "\\ ");
 
-		return RootTools.deleteFileOrDirectory(path, false);
+		if (!RootTools.deleteFileOrDirectory(path, false))
+		{
+			throw new IOException("Failed to delete file or directory " + path);
+		}
 	}
 }

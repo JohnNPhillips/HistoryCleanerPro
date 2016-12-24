@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,16 @@ public class DataViewActivity extends Activity
 			}
 		}
 
-		List<String[]> data = Globals.itemDataView.getSavedData();
+		List<String[]> data;
+		try {
+			data = Globals.itemDataView.getSavedData();
+		}
+		catch (IOException e)
+		{
+			displayMessageInTable("Couldn't get saved data for item");
+			return;
+		}
+
 		if (data == null)
 		{
 			displayMessageInTable("Viewing data is not supported for this item.");

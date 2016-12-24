@@ -8,6 +8,8 @@ import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.Logger;
 
+import java.io.IOException;
+
 public class _System_SMS extends CleanItem
 {
 	public _System_SMS(Category parent)
@@ -58,7 +60,7 @@ public class _System_SMS extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
 		try
 		{
@@ -67,10 +69,7 @@ public class _System_SMS extends CleanItem
 		}
 		catch (Exception e)
 		{
-			Logger.errorST("Problem cleaning SMS history", e);
-			return false;
+			throw new IOException("Couldn't delete SMS", e);
 		}
-
-		return true;
 	}
 }

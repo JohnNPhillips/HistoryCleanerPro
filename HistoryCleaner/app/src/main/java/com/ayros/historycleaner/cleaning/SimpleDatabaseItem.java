@@ -89,11 +89,11 @@ public class SimpleDatabaseItem extends CleanItem
 	}
 
 	@Override
-	public boolean clean() throws IOException
+	public void clean() throws IOException
 	{
 		if (!RootTools.exists(dbFile))
 		{
-			return true;
+			return;
 		}
 
 		RootDatabase db = new RootDatabase(dbFile, Globals.getRootShell());
@@ -101,10 +101,10 @@ public class SimpleDatabaseItem extends CleanItem
 		{
 			if (!precondition.passes(db))
 			{
-				return false;
+				throw new IOException("Precondition failed");
 			}
 		}
 
-		return DBHelper.updateDatabase(dbFile, cleanQueries);
+		DBHelper.updateDatabase(dbFile, cleanQueries);
 	}
 }

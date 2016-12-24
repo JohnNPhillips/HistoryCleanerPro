@@ -5,6 +5,8 @@ import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
+import java.io.IOException;
+
 public class _FirefoxBeta_OpenTabs extends CleanItem
 {
 	public _FirefoxBeta_OpenTabs(Category parent)
@@ -25,19 +27,10 @@ public class _FirefoxBeta_OpenTabs extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
-		String path = _FirefoxBeta_History.getFirefoxBetaDataPath();
-		if (path == null)
-		{
-			Logger.error("Could not get FireFox Beta data path to clear open tabs");
-			return false;
-		}
-		else if (path.length() == 0)
-		{
-			return true;
-		}
+		String path = FirefoxUtils.getFirefoxDataPath(getPackageName());
 
-		return RootHelper.deleteFileOrFolder(path + "/sessionstore.js", false);
+		RootHelper.deleteFileOrFolder(path + "/sessionstore.js");
 	}
 }

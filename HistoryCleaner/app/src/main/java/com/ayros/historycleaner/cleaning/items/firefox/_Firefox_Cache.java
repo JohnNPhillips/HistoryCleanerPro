@@ -5,6 +5,8 @@ import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 
+import java.io.IOException;
+
 public class _Firefox_Cache extends CleanItem
 {
 	public _Firefox_Cache(Category parent)
@@ -25,19 +27,10 @@ public class _Firefox_Cache extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
-		String path = _Firefox_History.getFirefoxDataPath();
-		if (path == null)
-		{
-			Logger.error("Could not get FireFox data path to clear cache");
-			return false;
-		}
-		else if (path.length() == 0)
-		{
-			return true;
-		}
+		String path = FirefoxUtils.getFirefoxDataPath(getPackageName());
 
-		return RootHelper.deleteFileOrFolder(path + "/Cache", false);
+		RootHelper.deleteFileOrFolder(path + "/Cache");
 	}
 }

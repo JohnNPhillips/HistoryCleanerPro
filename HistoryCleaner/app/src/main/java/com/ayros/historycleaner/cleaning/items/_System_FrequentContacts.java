@@ -64,14 +64,14 @@ public class _System_FrequentContacts extends CleanItem
 	}
 
 	@Override
-	public boolean clean() throws IOException
+	public void clean() throws IOException
 	{
 		if (!RootTools.exists("/data/data/com.android.providers.contacts/databases/contacts2.db"))
 		{
-			return true;
+			return;
 		}
 
-		return DBHelper.updateDatabase
+		DBHelper.updateDatabase
 		(
 			"/data/data/com.android.providers.contacts/databases/contacts2.db",
 			new String[]

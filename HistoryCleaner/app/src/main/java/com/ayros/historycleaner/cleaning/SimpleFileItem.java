@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.ayros.historycleaner.helpers.RootHelper;
@@ -45,7 +46,7 @@ public class SimpleFileItem extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
 		for (String file : clearFiles)
 		{
@@ -54,9 +55,7 @@ public class SimpleFileItem extends CleanItem
 				file = getDataPath() + file;
 			}
 			
-			RootHelper.deleteFileOrFolder(file, false);
+			RootHelper.deleteFileOrFolder(file);
 		}
-
-		return true;
 	}
 }

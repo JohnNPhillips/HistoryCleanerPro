@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning.items;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import android.content.pm.PackageManager;
@@ -48,7 +49,7 @@ public class _System_Cache extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
 		PackageManager pm = Globals.getContext().getPackageManager();
 		
@@ -60,16 +61,16 @@ public class _System_Cache extends CleanItem
 				try
 				{
 					m.invoke(pm, Long.MAX_VALUE, null);
-					
-					return true;
+
+					return;
 				}
 				catch (Exception e)
 				{
-					return false;
+					throw new IOException("Couldn't clear system cache", e);
 				}
 			}
 		}
 
-		return false;
+		throw new IOException("Couldn't find freeStorageAndNotify method");
 	}
 }

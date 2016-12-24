@@ -6,6 +6,8 @@ import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 import com.stericson.RootTools.RootTools;
 
+import java.io.IOException;
+
 public class _FirefoxBeta_LocalStorage extends CleanItem
 {
 	public _FirefoxBeta_LocalStorage(Category parent)
@@ -26,24 +28,15 @@ public class _FirefoxBeta_LocalStorage extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
-		String path = _FirefoxBeta_History.getFirefoxBetaDataPath();
-		if (path == null)
-		{
-			Logger.error("Could not get FireFox Beta data path to clear local storage");
-			return false;
-		}
-		else if (path.length() == 0)
-		{
-			return true;
-		}
+		String path = FirefoxUtils.getFirefoxDataPath(getPackageName());
 
 		if (!RootTools.exists(path + "/webappsstore.sqlite"))
 		{
-			return true;
+			return;
 		}
 
-		return RootHelper.deleteFileOrFolder(path + "/webappsstore.sqlite*", false);
+		RootHelper.deleteFileOrFolder(path + "/webappsstore.sqlite*");
 	}
 }

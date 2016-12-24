@@ -30,18 +30,9 @@ public class _Firefox_Cookies extends CleanItem
 	}
 	
 	@Override
-	public List<String []> getSavedData()
+	public List<String []> getSavedData() throws IOException
 	{
-		String path = _Firefox_History.getFirefoxDataPath();
-		if (path == null)
-		{
-			Logger.error("Could not get FireFox data path to view cookies");
-			return null;
-		}
-		else if (path.length() == 0)
-		{
-			return new ArrayList<String []>();
-		}
+		String path = FirefoxUtils.getFirefoxDataPath(getPackageName());
 
 		return DBHelper.queryDatabase
 		(
@@ -54,20 +45,11 @@ public class _Firefox_Cookies extends CleanItem
 	}
 	
 	@Override
-	public boolean clean() throws IOException
+	public void clean() throws IOException
 	{
-		String path = _Firefox_History.getFirefoxDataPath();
-		if (path == null)
-		{
-			Logger.error("Could not get FireFox data path to clear cookies");
-			return false;
-		}
-		else if (path.length() == 0)
-		{
-			return true;
-		}
+		String path = FirefoxUtils.getFirefoxDataPath(getPackageName());
 
-		return DBHelper.updateDatabase
+		DBHelper.updateDatabase
 		(
 			path + "/cookies.sqlite",
 			new String[]

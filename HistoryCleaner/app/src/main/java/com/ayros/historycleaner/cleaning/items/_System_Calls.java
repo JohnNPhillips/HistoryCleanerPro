@@ -6,6 +6,8 @@ import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 
+import java.io.IOException;
+
 public class _System_Calls extends CleanItem
 {
 	String display;
@@ -51,11 +53,16 @@ public class _System_Calls extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
 		String whereClause = "TYPE='" + type + "'";
-		Globals.getContext().getContentResolver().delete(android.provider.CallLog.Calls.CONTENT_URI, whereClause, null);
-
-		return true;
+		try
+		{
+			Globals.getContext().getContentResolver().delete(android.provider.CallLog.Calls.CONTENT_URI, whereClause, null);
+		}
+		catch (SecurityException e)
+		{
+			throw new IOException("Couldn't clear call history", e);
+		}
 	}
 }

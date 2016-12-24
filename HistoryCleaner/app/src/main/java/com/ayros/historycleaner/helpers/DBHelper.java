@@ -9,6 +9,7 @@ import android.content.Context;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.helpers.database.QueryResult;
 import com.ayros.historycleaner.helpers.database.RootDatabase;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 public class DBHelper
@@ -39,24 +40,18 @@ public class DBHelper
 		return queryOutput;
 	}
 
-	public static boolean updateDatabase(String dbPath, String[] queries) throws IOException
+	public static void updateDatabase(String dbPath, String[] queries) throws IOException
 	{
-		return updateDatabase(dbPath, Lists.newArrayList(queries));
+		updateDatabase(dbPath, Lists.newArrayList(queries));
 	}
 
-	public static boolean updateDatabase(String dbPath, List<String> queries) throws IOException
+	public static void updateDatabase(String dbPath, List<String> queries) throws IOException
 	{
 		RootDatabase db = new RootDatabase(dbPath, Globals.getRootShell());
 
-		for (String query : queries)
+		if (!db.runCommandsAsTransaction(queries))
 		{
-			if (!db.runCommand(query))
-			{
-				Logger.errorST("Could not execute query {" + query + "} on database {" + dbPath + "}");
-				return false;
-			}
+			throw new IOException("Could not execute queries {" + Joiner.on(" ").join(queries) + "} on database {" + dbPath + "}");
 		}
-
-		return true;
 	}
 }

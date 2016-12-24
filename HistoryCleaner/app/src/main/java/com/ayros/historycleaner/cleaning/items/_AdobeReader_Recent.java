@@ -1,11 +1,13 @@
 package com.ayros.historycleaner.cleaning.items;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.helpers.PrefsModifier;
+import com.ayros.historycleaner.helpers.RootHelper;
 import com.stericson.RootTools.RootTools;
 
 public class _AdobeReader_Recent extends CleanItem
@@ -47,8 +49,8 @@ public class _AdobeReader_Recent extends CleanItem
 	}
 
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
-		return RootTools.deleteFileOrDirectory(getDataPath() + "/shared_prefs/com.adobe.reader.preferences.xml", false);
+		RootHelper.deleteFileOrFolder(getDataPath() + "/shared_prefs/com.adobe.reader.preferences.xml");
 	}
 }

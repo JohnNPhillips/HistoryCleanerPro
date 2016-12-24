@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,7 +132,8 @@ public class Cleaner
 								{
 									try
 									{
-										Cleaner.this.cleanResult = ((CleanItem)data).clean();
+										((CleanItem)data).clean();
+										Cleaner.this.cleanResult = true;
 									}
 									catch (Exception e)
 									{
@@ -145,7 +147,8 @@ public class Cleaner
 						{
 							try
 							{
-								cleanResult = item.clean();
+								item.clean();
+								cleanResult = true;
 							}
 							catch (Exception e)
 							{
@@ -227,14 +230,8 @@ public class Cleaner
 				
 				try
 				{
-					if (item.clean())
-					{
-						results.success.add(item.getUniqueName());
-					}
-					else
-					{
-						results.failure.add(item.getUniqueName());
-					}
+					item.clean();
+					results.success.add(item.getUniqueName());
 				}
 				catch (Exception e)
 				{

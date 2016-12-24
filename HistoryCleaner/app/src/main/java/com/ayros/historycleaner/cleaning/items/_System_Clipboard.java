@@ -72,11 +72,9 @@ public class _System_Clipboard extends CleanItem
 	}
 	
 	@Override
-	public boolean clean()
+	public void clean()
 	{
 		ClipboardManager clipboard = (ClipboardManager)Globals.getContext().getSystemService(Context.CLIPBOARD_SERVICE); 
 		clipboard.setText(null);
-		
-		return true;
 	}
 }

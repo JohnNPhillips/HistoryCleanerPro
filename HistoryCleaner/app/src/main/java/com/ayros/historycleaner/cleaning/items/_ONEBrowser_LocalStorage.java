@@ -1,5 +1,6 @@
 package com.ayros.historycleaner.cleaning.items;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +51,8 @@ public class _ONEBrowser_LocalStorage extends CleanItem
 	}
 	
 	@Override
-	public boolean clean()
+	public void clean() throws IOException
 	{
-		return RootTools.deleteFileOrDirectory(getDataPath() + "/app_databases/*.localstorage", false);
+		RootHelper.deleteFileOrFolder(getDataPath() + "/app_databases/*.localstorage");
 	}
 }

@@ -80,7 +80,17 @@ public class CategoryList
 		// ----- Adobe Reader -----
 		// ------------------------
 		cat = new Category("Adobe Reader");
-		cat.addItem(new com.ayros.historycleaner.cleaning.items._AdobeReader_Recent(cat));
+		cat.addItem(new SimpleDatabaseItem
+		(
+			cat, "Recent Files", "com.adobe.reader", "/databases/com.adobe.reader.filebrowser.ARRecentsFileManager.ARRecentsFileDatabase",
+			new DBQuery
+			(
+				new String[] { "File Name", "File Path" },
+				"ARRecentsFileTable",
+				new String[] { "fileName", "filePath" }
+			),
+			new String[] { "DELETE FROM ARRecentsFileTable;" }
+		));
 		cats.add(cat);
 		
 		// ------------------

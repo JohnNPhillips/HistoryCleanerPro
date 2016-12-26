@@ -104,12 +104,12 @@ public class Cleaner
 							// If activity is provided, run event on UI thread
 							if (activity != null)
 							{
-								new UIRunner(activity, cpe)
+								new UIRunner<CleanProgressEvent>(activity, cpe)
 								{
 									@Override
-									public void action(Object data)
+									public void action(CleanProgressEvent event)
 									{
-										cl.progressChanged((CleanProgressEvent)data);
+										cl.progressChanged(event);
 									}
 								}.runAndWait();
 							}
@@ -123,19 +123,19 @@ public class Cleaner
 						cleanResult = false;
 						if (item.runOnUIThread() && activity != null)
 						{
-							new UIRunner(activity, item)
+							new UIRunner<CleanItemStub>(activity, item)
 							{
 								@Override
-								public void action(Object data)
+								public void action(CleanItemStub item)
 								{
 									try
 									{
-										((CleanItemStub)data).clean();
+										item.clean();
 										Cleaner.this.cleanResult = true;
 									}
 									catch (Exception e)
 									{
-										Logger.errorST("Exception cleaning item " + ((CleanItemStub)data).getUniqueName(), e);
+										Logger.errorST("Exception cleaning item " + item.getUniqueName(), e);
 										Cleaner.this.cleanResult = false;
 									}
 								}
@@ -176,12 +176,12 @@ public class Cleaner
 					// If activity is provided, run event on UI thread
 					if (activity != null)
 					{
-						new UIRunner(activity, results)
+						new UIRunner<CleanResults>(activity, results)
 						{
 							@Override
-							public void action(Object data)
+							public void action(CleanResults results)
 							{
-								cl.cleaningComplete((CleanResults)data);
+								cl.cleaningComplete(results);
 							}
 						}.runAndWait();
 					}

@@ -4,7 +4,7 @@ import java.util.concurrent.CountDownLatch;
 
 import android.app.Activity;
 
-public abstract class UIRunner
+public abstract class UIRunner<DataType>
 {
 	private class UIRunnable implements Runnable
 	{
@@ -21,11 +21,11 @@ public abstract class UIRunner
 	}
 	
 	CountDownLatch latch = null;
-	Object data = null;
+	DataType data = null;
 	
 	Activity activity;
 	
-	public UIRunner(Activity a, Object data)
+	public UIRunner(Activity a, DataType data)
 	{
 		this.activity = a;
 		this.data = data;
@@ -50,5 +50,5 @@ public abstract class UIRunner
 		}
 	}
 	
-	public abstract void action(Object data);
+	public abstract void action(DataType data);
 }

@@ -40,29 +40,16 @@ public class RootHelper
 		return new ExecutionResult(cc.toString(), cc.getExitCode());
 	}
 
-	public static String runAndWait(String cmd)
+	public static String runAndWait(String cmd) throws IOException
 	{
-		Logger.debug("Run&Wait: " + cmd);
-
-		CommandCapture cc = new CommandCapture(0, cmd);
-
 		try
 		{
-			RootTools.getShell(true).runRootCommand(cc);
+			return runAndWait(cmd, RootTools.getShell(true)).getOutput();
 		}
-		catch (Exception e)
+		catch (RootDeniedException | TimeoutException e)
 		{
-			Logger.errorST("Exception when trying to run shell command", e);
-
-			return null;
+			throw new IOException(e);
 		}
-
-		if (!waitForCommand(cc))
-		{
-			return null;
-		}
-
-		return cc.toString();
 	}
 
 	private static boolean waitForCommand(Command cmd)
@@ -95,7 +82,7 @@ public class RootHelper
 		return true;
 	}
 
-	public static boolean fileOrFolderExists(String path)
+	public static boolean fileOrFolderExists(String path) throws IOException
 	{
 		Logger.debug("File or folder exists: " + path);
 
@@ -122,7 +109,7 @@ public class RootHelper
 		return exists;
 	}
 
-	public static List<String> getFilesList(String path)
+	public static List<String> getFilesList(String path) throws IOException
 	{
 		Logger.debug("Getting file list: " + path);
 
@@ -150,28 +137,9 @@ public class RootHelper
 		}
 	}
 
-	public static String getFileContents(String path)
+	public static String getFileContents(String path) throws IOException
 	{
-		Logger.debug("Getting file contents: " + path);
-
-		String tempFile = Globals.getContext().getCacheDir().getAbsolutePath() + "/_file_" + Helper.randomString(8) + ".txt";
-
-		if (!RootTools.copyFile(path, tempFile, false, true))
-		{
-			Logger.debug("Could not copy " + path + " to a temp directory for reading");
-			return null;
-		}
-
-		if (runAndWait(RootTools.getWorkingToolbox() + " chmod 777 " + tempFile) == null)
-		{
-			Logger.error("Could not set file attributes to read contents: " + tempFile);
-			return null;
-		}
-
-		String data = Helper.getFileContents(tempFile);
-		RootTools.deleteFileOrDirectory(tempFile, false);
-
-		return data;
+		return RootHelper.runAndWait("cat " + path);
 	}
 
 	public static void deleteFileOrFolder(String path) throws IOException

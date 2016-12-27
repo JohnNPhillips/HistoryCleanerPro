@@ -28,7 +28,7 @@ public class _ONEBrowser_LocalStorage extends CleanItemStub
 	}
 	
 	@Override
-	public List<String[]> getSavedData()
+	public List<String[]> getSavedData() throws IOException
 	{
 		List<String[]> ret = new ArrayList<String[]>();
 		List<String> fileList = RootHelper.getFilesList(getDataPath() + "/app_databases/*.localstorage");

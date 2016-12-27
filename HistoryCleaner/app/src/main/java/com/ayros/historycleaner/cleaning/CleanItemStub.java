@@ -73,9 +73,9 @@ public abstract class CleanItemStub implements CleanItem
 	}
 
 	// Override
-	public List<String[]> getSavedData() throws IOException
+	public List<String[]> getSavedData() throws IOException, UnsupportedOperationException
 	{
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean isApplicable()

@@ -28,7 +28,7 @@ public interface CleanItem
 
     ViewGroup getView();
 
-    List<String[]> getSavedData() throws IOException;
+    List<String[]> getSavedData() throws IOException, UnsupportedOperationException;
 
     boolean isApplicable();
 

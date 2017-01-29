@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayros.historycleaner.ProfileAdapter;
@@ -141,14 +142,15 @@ public class ProfileFragment extends Fragment implements OnClickListener, OnProf
 
 	public void refreshProfileList()
 	{
-		ListView lv = (ListView)this.getView().findViewById(R.id.profile_list);
-
 		List<Profile> profList = ProfileList.getClonedList(false);
 
+		TextView noneInstructions = (TextView) this.getView().findViewById(R.id.profile_none_text);
+		noneInstructions.setVisibility(profList.isEmpty() ? View.VISIBLE : View.GONE);
+
+		ListView lv = (ListView) this.getView().findViewById(R.id.profile_list);
 		Profile[] profData = profList.toArray(new Profile[profList.size()]);
 
 		ProfileAdapter adapter = new ProfileAdapter(this.getActivity(), R.layout.profile_list_item, profData, this);
-
 		lv.setAdapter(adapter);
 	}
 

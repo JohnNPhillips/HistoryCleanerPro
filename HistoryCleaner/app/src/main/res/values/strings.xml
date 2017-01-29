@@ -18,6 +18,7 @@
     <!--  -->
     <string name="clean_clear_items">Clear Items</string>
     <!--  -->
+    <string name="profile_none_text">You don\'t have any profiles created currently. To create one, select items on the \'Clean\' tab, and press \'Save as Profile\' in the options menu.</string>
     <string name="profile_list_row_load">Load</string>
     <string name="profile_list_row_settings">Settings</string>
     <!--  -->

@@ -136,7 +136,6 @@ public class Cleaner
 									catch (Exception e)
 									{
 										Logger.errorST("Exception cleaning item " + item.getUniqueName(), e);
-										Cleaner.this.cleanResult = false;
 									}
 								}
 							}.runAndWait();
@@ -151,7 +150,6 @@ public class Cleaner
 							catch (Exception e)
 							{
 								Logger.errorST("Exception cleaning item " + item.getUniqueName(), e);
-								cleanResult = false;
 							}
 						}
 						item.postClean();

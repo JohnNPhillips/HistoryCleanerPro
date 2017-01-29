@@ -55,6 +55,8 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		{
 			Profile newProf = ProfileList.create(profileName);
 			catList.saveProfile(newProf);
+			catList.saveProfile(ProfileList.getDefault());
+			((OnProfileUpdated)getActivity()).onProfileUpdated();
 		}
 	}
 
@@ -120,7 +122,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	{
 		super.onStart();
 
-		catList.loadProfile(ProfileList.get(null));
+		catList.loadProfile(ProfileList.getDefault());
 		catList.registerContextMenu(this);
 
 		Button cleanButton = (Button)getView().findViewById(R.id.clean_btnClear);
@@ -167,7 +169,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 		if (catList != null)
 		{
-			catList.saveProfile(ProfileList.get(null));
+			catList.saveProfile(ProfileList.getDefault());
 		}
 	}
 
@@ -176,7 +178,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	{
 		super.onResume();
 
-		catList.loadProfile(ProfileList.get(null));
+		catList.loadProfile(ProfileList.getDefault());
 	}
 
 	@Override
@@ -184,7 +186,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	{
 		if (catList != null)
 		{
-			catList.saveProfile(ProfileList.get(null));
+			catList.saveProfile(ProfileList.getDefault());
 		}
 
 		try
@@ -398,7 +400,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	@Override
 	public void onProfileUpdated()
 	{
-		catList.loadProfile(ProfileList.get(null));
+		catList.loadProfile(ProfileList.getDefault());
 	}
 
 	public void showSaveProfileDialog()
@@ -441,6 +443,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 				{
 					Profile newProf = ProfileList.create(newName);
 					catList.saveProfile(newProf);
+					catList.saveProfile(ProfileList.getDefault());
 					((OnProfileUpdated)getActivity()).onProfileUpdated();
 				}
 			}

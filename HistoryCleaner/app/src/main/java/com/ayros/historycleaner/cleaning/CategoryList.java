@@ -897,7 +897,7 @@ public class CategoryList
 		
 		return items;
 	}
-	
+
 	public void loadProfile(Profile p)
 	{
 		if (p != null)

@@ -34,7 +34,7 @@ public class ProfileFragment extends Fragment implements OnClickListener, OnProf
 
 		public void onClick(DialogInterface dialog, int whichButton)
 		{
-			ProfileList.get(null).copyFrom(profile);
+			ProfileList.getDefault().copyFrom(profile);
 			sendProfileUpdatedMessage();
 		}
 	}

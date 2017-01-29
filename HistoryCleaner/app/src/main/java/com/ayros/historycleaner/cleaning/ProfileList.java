@@ -53,14 +53,14 @@ public class ProfileList
 		
 		return prefEdit.commit();
 	}
-	
+
+	public static Profile getDefault()
+	{
+		return get(LAST_VIEW);
+	}
+
 	public static Profile get(String name)
 	{
-		if (name == null)
-		{
-			name = LAST_VIEW;
-		}
-		
 		int index = indexOf(name);
 		if (index == -1)
 		{

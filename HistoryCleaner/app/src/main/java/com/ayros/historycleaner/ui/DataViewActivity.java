@@ -60,17 +60,18 @@ public class DataViewActivity extends Activity
 		try {
 			data = Globals.itemDataView.getSavedData();
 		}
+		catch (UnsupportedOperationException e)
+		{
+			displayMessageInTable("Viewing data is not supported for this item.");
+			return;
+		}
 		catch (IOException e)
 		{
 			displayMessageInTable("Couldn't get saved data for item");
 			return;
 		}
 
-		if (data == null)
-		{
-			displayMessageInTable("Viewing data is not supported for this item.");
-		}
-		else if (data.size() <= 1)
+		if (data.size() <= 1)
 		{
 			displayMessageInTable("There are no items.");
 		}

@@ -247,7 +247,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 		pd.show();
 
-		itemCleaner.cleanAsync(getActivity(), Optional.of((CleanListener)new CleanListener()
+		itemCleaner.cleanAsync(Optional.of(getActivity()), Optional.of((CleanListener)new CleanListener()
 		{
 			@Override
 			public void progressChanged(Cleaner.CleanProgressEvent cpe)

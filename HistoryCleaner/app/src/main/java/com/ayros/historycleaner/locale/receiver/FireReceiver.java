@@ -26,12 +26,14 @@ import android.widget.Toast;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.CategoryList;
 import com.ayros.historycleaner.cleaning.CleanItemStub;
+import com.ayros.historycleaner.cleaning.CleanListener;
 import com.ayros.historycleaner.cleaning.Cleaner;
 import com.ayros.historycleaner.cleaning.Profile;
 import com.ayros.historycleaner.cleaning.ProfileList;
 import com.ayros.historycleaner.locale.Constants;
 import com.ayros.historycleaner.locale.bundle.BundleScrubber;
 import com.ayros.historycleaner.locale.bundle.PluginBundleManager;
+import com.google.common.base.Optional;
 import com.stericson.RootShell.execution.Shell;
 
 /**
@@ -59,7 +61,6 @@ public final class FireReceiver extends BroadcastReceiver
 		 * Always be strict on input parameters! A malicious third-party app
 		 * could send a malformed Intent.
 		 */
-
 		if (!com.twofortyfouram.locale.api.Intent.ACTION_FIRE_SETTING.equals(intent.getAction()))
 		{
 			if (Constants.IS_LOGGABLE)
@@ -103,13 +104,11 @@ public final class FireReceiver extends BroadcastReceiver
 					}
 					catch (Exception e)
 					{
-						Toast.makeText(context, "Error: Could not aquire root access, cannot clean profile " + profileName, Toast.LENGTH_LONG).show();
+						Toast.makeText(context, "Error: Could not acquire root access, cannot clean profile " + profileName, Toast.LENGTH_LONG).show();
 						return;
 					}
 				}
-
-				Cleaner.CleanResults results = cleaner.cleanNow(null);
-
+				Cleaner.CleanResults results = cleaner.cleanNow(Optional.<CleanListener>absent());
 				if (results.hasFailures())
 				{
 					Toast.makeText(context, results.toString(), Toast.LENGTH_LONG).show();

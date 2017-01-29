@@ -4,51 +4,46 @@ import java.util.concurrent.CountDownLatch;
 
 import android.app.Activity;
 
-public abstract class UIRunner<DataType>
+import com.ayros.historycleaner.helpers.Logger;
+import com.google.common.base.Optional;
+
+public class UIRunner
 {
-	private class UIRunnable implements Runnable
-	{
-		@Override
-		public void run()
-		{
-			action(data);
-			
-			if (latch != null)
-			{
-				latch.countDown();
-			}
-		}
-	}
-	
-	CountDownLatch latch = null;
-	DataType data = null;
-	
-	Activity activity;
-	
-	public UIRunner(Activity a, DataType data)
+	private final Optional<? extends Activity> activity;
+
+	public UIRunner(Optional<? extends Activity> a)
 	{
 		this.activity = a;
-		this.data = data;
 	}
-	
-	public void run()
+
+	public void runAndWait(final Runnable runnable)
 	{
-		latch = null;
-		activity.runOnUiThread(new UIRunnable());
-	}
-	
-	public void runAndWait()
-	{
-		latch = new CountDownLatch(1);
-		activity.runOnUiThread(new UIRunnable());
-		try
+		if (activity.isPresent())
 		{
-			latch.await();
+			final CountDownLatch latch = new CountDownLatch(1);
+			activity.get().runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					runnable.run();
+					latch.countDown();
+				}
+			});
+			try
+			{
+				latch.await();
+			}
+			catch (InterruptedException e)
+			{
+				Logger.errorST("Interrupted", e);
+				Thread.currentThread().interrupt();
+				throw new RuntimeException(e);
+			}
 		}
-		catch (InterruptedException e)
+		else
 		{
+			runnable.run();
 		}
 	}
-	
-	public abstract void action(DataType data);
 }

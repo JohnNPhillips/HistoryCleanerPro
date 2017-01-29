@@ -33,10 +33,9 @@ public class Logger
 	{
 		error(message);
 
-		System.err.println("Inner Exception: " + e.toString());
 		if (isLogToFileMode())
 		{
-			logToFile("Inner Exception: " + e.toString());
+			logToFile("Exception: " + e.toString());
 		}
 
 		System.err.print("Stack Trace: ");

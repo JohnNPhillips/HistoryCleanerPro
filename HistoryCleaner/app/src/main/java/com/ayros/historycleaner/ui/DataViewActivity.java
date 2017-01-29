@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
@@ -67,7 +68,16 @@ public class DataViewActivity extends Activity
 		}
 		catch (IOException e)
 		{
-			displayMessageInTable("Couldn't get saved data for item");
+			Logger.errorST("Couldn't get saved item for item " + Globals.itemDataView.getUniqueName(), e);
+			String emailHref = getMailToHref(
+					"Error getting data for: " + Globals.itemDataView.getUniqueName(),
+					"Stack Trace: " + Log.getStackTraceString(e));
+			displayHtmlMessage(String.format("Couldn't get saved data for %s. " +
+					"Most likely the app was updated in a way that changed how they store their data. " +
+					"If you send me an email at ayros@email.com, I should be able to fix it. " +
+					"Clicking <a href='%s'>this link</a> will allow you to send me an email with all the necessary information to debug this.",
+					Globals.itemDataView.getUniqueName(),
+					emailHref));
 			return;
 		}
 
@@ -79,6 +89,21 @@ public class DataViewActivity extends Activity
 		{
 			setTableData(data);
 		}
+	}
+
+	private String getMailToHref(String subject, String body)
+	{
+		StringBuilder href = new StringBuilder();
+		href.append("mailto:ayros@email.com");
+		href.append("?subject=" + TextUtils.htmlEncode(subject));
+		href.append("&body=" + TextUtils.htmlEncode(body));
+
+		return href.toString();
+	}
+
+	private void displayHtmlMessage(String message)
+	{
+		setPageBody("<p>" + message + "</p>");
 	}
 
 	private void displayMessageInTable(String message)
@@ -97,6 +122,27 @@ public class DataViewActivity extends Activity
 
 	private void setTableData(List<String[]> data)
 	{
+		StringBuilder table = new StringBuilder();
+
+		table.append("<table>");
+		for (int i = 0; i < data.size(); i++)
+		{
+			table.append("<tr>");
+
+			for (String text : data.get(i))
+			{
+				appendCell(table, text, i == 0, i % 2 == 0);
+			}
+
+			table.append("</tr>");
+		}
+		table.append("</table>");
+
+		setPageBody(table.toString());
+	}
+
+	private void setPageBody(String body)
+	{
 		StringBuilder html = new StringBuilder();
 
 		html.append("<html><head>");
@@ -107,20 +153,9 @@ public class DataViewActivity extends Activity
 		html.append(".evenRow { background-color: #E5E5E5; } ");
 		html.append("table, th, td { border: 1px solid black; }");
 		html.append("</style>");
+		html.append("</head>");
 
-		html.append("</head><body><table>");
-		for (int i = 0; i < data.size(); i++)
-		{
-			html.append("<tr>");
-
-			for (String text : data.get(i))
-			{
-				appendCell(html, text, i == 0, i % 2 == 0);
-			}
-
-			html.append("</tr>");
-		}
-		html.append("</table></body>");
+		html.append("<body>" + body + "</body>");
 
 		html.append("</html>");
 

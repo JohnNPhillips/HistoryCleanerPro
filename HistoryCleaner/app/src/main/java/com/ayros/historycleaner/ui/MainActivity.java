@@ -101,6 +101,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 				Intent intent = new Intent(this, HelpActivity.class);
 				startActivity(intent);
 				return true;
+
+			case R.id.main_menu_settings:
+				startActivity(new Intent(this, SettingsActivity.class));
+				return true;
 		}
 
 		return super.onOptionsItemSelected(item);

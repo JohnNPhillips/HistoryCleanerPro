@@ -6,9 +6,12 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -148,8 +151,12 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		}
 		else if (displayTip != null)
 		{
-			Toast.makeText(getActivity(), displayTip, Toast.LENGTH_LONG).show();
-			displayTip = null;
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+			if (prefs.getBoolean(getResources().getString(R.string.pref_showTips_key), true))
+			{
+				Toast.makeText(getActivity(), displayTip, Toast.LENGTH_LONG).show();
+				displayTip = null;
+			}
 		}
 	}
 

@@ -55,6 +55,10 @@
             android:label="@string/title_activity_help" >
         </activity>
         <activity
+            android:name="com.ayros.historycleaner.ui.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
             android:name="com.ayros.historycleaner.locale.ui.EditPluginActivity"
             android:exported="true"
             android:label="@string/app_plugin_name" >

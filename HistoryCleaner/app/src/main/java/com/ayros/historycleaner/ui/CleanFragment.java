@@ -34,6 +34,7 @@ import com.ayros.historycleaner.cleaning.Cleaner.CleanResults;
 import com.ayros.historycleaner.cleaning.Profile;
 import com.ayros.historycleaner.cleaning.ProfileList;
 import com.ayros.historycleaner.helpers.Logger;
+import com.google.common.base.Optional;
 import com.stericson.RootTools.RootTools;
 
 public class CleanFragment extends Fragment implements OnClickListener, OnProfileUpdated
@@ -246,7 +247,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 		pd.show();
 
-		itemCleaner.cleanAsync(getActivity(), new CleanListener()
+		itemCleaner.cleanAsync(getActivity(), Optional.of((CleanListener)new CleanListener()
 		{
 			@Override
 			public void progressChanged(Cleaner.CleanProgressEvent cpe)
@@ -294,7 +295,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 					e.printStackTrace();
 				}
 			}
-		});
+		}));
 	}
 
 	public static String getTip()

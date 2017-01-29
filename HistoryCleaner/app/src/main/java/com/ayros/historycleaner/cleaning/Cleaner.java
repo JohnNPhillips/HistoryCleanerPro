@@ -1,37 +1,59 @@
 package com.ayros.historycleaner.cleaning;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 
 import com.ayros.historycleaner.UIRunner;
 import com.ayros.historycleaner.helpers.Logger;
+import com.google.common.base.Optional;
+import com.stericson.RootShell.exceptions.RootDeniedException;
 import com.stericson.RootTools.RootTools;
 
 public class Cleaner
 {
 	public class CleanResults
 	{
-		public List<String> success = new ArrayList<String>();
-		public List<String> failure = new ArrayList<String>();
-		
+		private final List<CleanItem> successes = new ArrayList<>();
+		private final Map<CleanItem, Exception> failures = new HashMap<>();
+
+		public void addSuccess(CleanItem item)
+		{
+			Logger.debug("Cleaned Successfully: " + item.getUniqueName());
+			successes.add(item);
+		}
+
+		public void addFailure(CleanItem item, Exception e)
+		{
+			Logger.debug("Cleaning failure: " + item.getUniqueName());
+			failures.put(item, e);
+		}
+
+		public boolean hasFailures()
+		{
+			return !failures.isEmpty();
+		}
+
 		@Override
 		public String toString()
 		{
 			StringBuilder sb = new StringBuilder();
 			
-			if (failure.size() == 0)
+			if (failures.size() == 0)
 			{
-				sb.append("Cleaned all " + success.size() + " items successfully!");
+				sb.append("Cleaned all " + successes.size() + " items successfully!");
 			}
 			else
 			{
-				sb.append("Cleaned " + success.size() + " items successfully\n");
-				sb.append("Encountered errors with " + failure.size() + " items:");
-				for (String itemName : failure)
+				sb.append("Cleaned " + successes.size() + " items successfully\n");
+				sb.append("Encountered errors with " + failures.size() + " items:");
+				for (CleanItem failureItem : failures.keySet())
 				{
-					sb.append("\n" + itemName);
+					sb.append("\n" + failureItem.getUniqueName());
 				}
 			}
 			
@@ -54,11 +76,10 @@ public class Cleaner
 	}
 	
 	private List<CleanItemStub> cleanList;
-	private boolean cleanResult;
-	
+
 	public Cleaner(List<CleanItemStub> itemList)
 	{
-		cleanList = new ArrayList<CleanItemStub>(itemList);
+		cleanList = new ArrayList<>(itemList);
 	}
 	
 	/**
@@ -69,14 +90,14 @@ public class Cleaner
 	 * @param cl
 	 * @return
 	 */
-	public void cleanAsync(final Activity activity, final CleanListener cl)
+	public void cleanAsync(final Activity activity, final Optional<CleanListener> cl)
 	{
 		new Thread()
 		{
 			@Override
 			public void run()
 			{
-				CleanResults results = new CleanResults();
+				final CleanResults results = new CleanResults();
 				
 				if (isRootRequired() && !RootTools.isAccessGiven())
 				{
@@ -84,7 +105,7 @@ public class Cleaner
 					
 					for (CleanItemStub item : cleanList)
 					{
-						results.failure.add(item.getUniqueName());
+						results.addFailure(item, new RootDeniedException("Root shell not started"));
 					}
 				}
 				else
@@ -97,7 +118,7 @@ public class Cleaner
 						Logger.debug("About to clean item: " + item.getUniqueName());
 						
 						// Send progressChanged message
-						if (cl != null)
+						if (cl.isPresent())
 						{
 							CleanProgressEvent cpe = new CleanProgressEvent(item, i, cleanList.size());
 							
@@ -109,18 +130,17 @@ public class Cleaner
 									@Override
 									public void action(CleanProgressEvent event)
 									{
-										cl.progressChanged(event);
+										cl.get().progressChanged(event);
 									}
 								}.runAndWait();
 							}
 							else
 							{
-								cl.progressChanged(cpe);
+								cl.get().progressChanged(cpe);
 							}
 						}
 						
 						// Clean item running on UI thread if necessary
-						cleanResult = false;
 						if (item.runOnUIThread() && activity != null)
 						{
 							new UIRunner<CleanItemStub>(activity, item)
@@ -131,11 +151,12 @@ public class Cleaner
 									try
 									{
 										item.clean();
-										Cleaner.this.cleanResult = true;
+										results.addSuccess(item);
 									}
 									catch (Exception e)
 									{
 										Logger.errorST("Exception cleaning item " + item.getUniqueName(), e);
+										results.addFailure(item, e);
 									}
 								}
 							}.runAndWait();
@@ -145,31 +166,20 @@ public class Cleaner
 							try
 							{
 								item.clean();
-								cleanResult = true;
+								results.addSuccess(item);
 							}
 							catch (Exception e)
 							{
 								Logger.errorST("Exception cleaning item " + item.getUniqueName(), e);
+								results.addFailure(item, e);
 							}
 						}
 						item.postClean();
-						
-						// Add result to clean results
-						if (cleanResult)
-						{
-							Logger.debug("Cleaned Successfully: " + item.getUniqueName());
-							results.success.add(item.getUniqueName());
-						}
-						else
-						{
-							Logger.debug("Cleaning failure: " + item.getUniqueName());
-							results.failure.add(item.getUniqueName());
-						}
 					}
 				}
 				
 				// Send cleaningComplete event
-				if (cl != null)
+				if (cl.isPresent())
 				{
 					// If activity is provided, run event on UI thread
 					if (activity != null)
@@ -179,13 +189,13 @@ public class Cleaner
 							@Override
 							public void action(CleanResults results)
 							{
-								cl.cleaningComplete(results);
+								cl.get().cleaningComplete(results);
 							}
 						}.runAndWait();
 					}
 					else
 					{
-						cl.cleaningComplete(results);
+						cl.get().cleaningComplete(results);
 					}
 				}
 			}
@@ -200,7 +210,7 @@ public class Cleaner
 	 * @param cl
 	 * @return
 	 */
-	public CleanResults cleanNow(CleanListener cl)
+	public CleanResults cleanNow(Optional<CleanListener> cl)
 	{
 		CleanResults results = new CleanResults();
 		
@@ -210,7 +220,7 @@ public class Cleaner
 			
 			for (CleanItemStub item : cleanList)
 			{
-				results.failure.add(item.getUniqueName());
+				results.addFailure(item, new RootDeniedException("Root shell not running"));
 			}
 		}
 		else
@@ -219,29 +229,29 @@ public class Cleaner
 			{
 				CleanItemStub item = cleanList.get(i);
 				
-				if (cl != null)
+				if (cl.isPresent())
 				{
-					cl.progressChanged(new CleanProgressEvent(item, i, cleanList.size()));
+					cl.get().progressChanged(new CleanProgressEvent(item, i, cleanList.size()));
 				}
 				
 				try
 				{
 					item.clean();
-					results.success.add(item.getUniqueName());
+					results.addSuccess(item);
 				}
 				catch (Exception e)
 				{
 					Logger.errorST("Exception cleaning item " + item.getUniqueName(), e);
-					results.failure.add(item.getUniqueName());
+					results.addFailure(item, e);
 				}
 				
 				item.postClean();
 			}
 		}
-		
-		if (cl != null)
+
+		if (cl.isPresent())
 		{
-			cl.cleaningComplete(results);
+			cl.get().cleaningComplete(results);
 		}
 		
 		return results;

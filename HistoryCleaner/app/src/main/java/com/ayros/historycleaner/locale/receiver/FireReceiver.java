@@ -110,7 +110,7 @@ public final class FireReceiver extends BroadcastReceiver
 
 				Cleaner.CleanResults results = cleaner.cleanNow(null);
 
-				if (results.failure.size() > 0)
+				if (results.hasFailures())
 				{
 					Toast.makeText(context, results.toString(), Toast.LENGTH_LONG).show();
 				}

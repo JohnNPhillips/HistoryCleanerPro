@@ -1,13 +1,11 @@
+4.1.0
+- App now supports all Android versions 4.0+
+- Rename to "Ayros History Cleaner"
+- Added ability to easily submit error reports from within the app
+- Fix Adobe Reader:Recent Files
+- Lots of under-the-hood changes
+
 4.0.1
 - Temporarily removed Android 6.0 (Marshmallow) support due to SELinux problems
-
-4.0.0
-- Numerous internal changes, please report any issues!
-- App now requires Android 4.0
-- Fixed Dictionary.com cleaning
-- Fixed problems with missing BusyBox
-
-3.1.4
-- Fix rotation bug for some users
 
 Email ayros@email.com if you have any issues, I am here to help.

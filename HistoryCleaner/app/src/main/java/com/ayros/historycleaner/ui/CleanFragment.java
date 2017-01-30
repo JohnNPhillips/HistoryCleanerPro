@@ -5,11 +5,13 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -266,7 +268,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 			}
 
 			@Override
-			public void cleaningComplete(CleanResults results)
+			public void cleaningComplete(final CleanResults results)
 			{
 				try
 				{
@@ -292,7 +294,28 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 						}
 					}
 				});
+				if (results.hasFailures())
+				{
+					resultsDialog.setNeutralButton(R.string.clean_fail_dialog_send, new DialogInterface.OnClickListener()
+					{
+						public void onClick(DialogInterface dialog, int id)
+						{
+							dialog.dismiss();
 
+							Intent intent = new Intent(Intent.ACTION_SENDTO);
+							intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+							intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ayros@email.com"});
+							intent.putExtra(Intent.EXTRA_SUBJECT, "History Cleaner Failure Report");
+							intent.putExtra(Intent.EXTRA_TEXT, results.getErrorReport());
+							startActivity(intent);
+
+							if (exitOnFinish)
+							{
+								getActivity().finish();
+							}
+						}
+					});
+				}
 				resultsDialog.show();
 
 				try

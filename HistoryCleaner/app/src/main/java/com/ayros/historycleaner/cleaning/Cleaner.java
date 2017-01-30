@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.ayros.historycleaner.UIRunner;
 import com.ayros.historycleaner.helpers.Logger;
@@ -38,6 +39,18 @@ public class Cleaner
 			return !failures.isEmpty();
 		}
 
+		public String getErrorReport()
+		{
+			StringBuilder sb = new StringBuilder();
+			for (Map.Entry<CleanItem, Exception> entry : failures.entrySet())
+			{
+				sb.append("Item Name: " + entry.getKey().getUniqueName() + "\n");
+				sb.append("Stack Trace: " + Log.getStackTraceString(entry.getValue()));
+				sb.append("\n\n");
+			}
+
+			return sb.toString();
+		}
 		@Override
 		public String toString()
 		{

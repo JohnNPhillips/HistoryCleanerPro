@@ -19,6 +19,7 @@
     <string name="title_activity_settings">Settings</string>
     <!--  -->
     <string name="clean_clear_items">Clear Items</string>
+    <string name="clean_fail_dialog_send">Send Error Report</string>
     <!--  -->
     <string name="profile_none_text">You don\'t have any profiles created currently. To create one, select items on the \'Clean\' tab, and press \'Save as Profile\' in the options menu.</string>
     <string name="profile_list_row_load">Load</string>

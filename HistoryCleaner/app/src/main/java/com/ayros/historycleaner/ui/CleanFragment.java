@@ -401,7 +401,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 				for (CleanItemStub ci : items)
 				{
 					// Only check item if there is no warning message (don't accidently clean something sensitive)
-					if (ci.getWarningMessage() == null)
+					if (!ci.getWarningMessage().isPresent())
 					{
 						ci.setChecked(true);
 					}

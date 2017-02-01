@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.common.base.Optional;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public interface CleanItem
 
     String getUniqueName();
 
-    String getWarningMessage();
+    Optional<String> getWarningMessage();
 
     ViewGroup getView();
 

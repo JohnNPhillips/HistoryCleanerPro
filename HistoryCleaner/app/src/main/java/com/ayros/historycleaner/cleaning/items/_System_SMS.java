@@ -7,6 +7,7 @@ import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItemStub;
 import com.ayros.historycleaner.helpers.Logger;
+import com.google.common.base.Optional;
 
 import java.io.IOException;
 
@@ -30,9 +31,9 @@ public class _System_SMS extends CleanItemStub
 	}
 
 	@Override
-	public String getWarningMessage()
+	public Optional<String> getWarningMessage()
 	{
-		return "This will delete ALL previous text messages. Be sure this is what you want to do.";
+		return Optional.of("This will delete ALL previous text messages. Be sure this is what you want to do.");
 	}
 
 	@Override

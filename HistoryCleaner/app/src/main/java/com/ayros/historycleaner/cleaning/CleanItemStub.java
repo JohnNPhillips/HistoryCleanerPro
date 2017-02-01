@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import android.app.ActivityManager;
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.R;
 import com.ayros.historycleaner.helpers.Helper;
+import com.google.common.base.Optional;
 
 public abstract class CleanItemStub implements CleanItem
 {
@@ -59,12 +61,10 @@ public abstract class CleanItemStub implements CleanItem
 	 * A warning message to be displayed when the item is selected. Should be
 	 * used for cleaning volatile items such as SMS history, saved passwords,
 	 * etc.
-	 * 
-	 * @return Warning message or null
 	 */
-	public String getWarningMessage()
+	public Optional<String> getWarningMessage()
 	{
-		return null;
+		return Optional.absent();
 	}
 
 	public ViewGroup getView()
@@ -180,9 +180,9 @@ public abstract class CleanItemStub implements CleanItem
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 			{
-				if (isChecked && getWarningMessage() != null)
+				if (isChecked && getWarningMessage().isPresent())
 				{
-					Toast.makeText(c, "WARNING: " + getWarningMessage(), Toast.LENGTH_LONG).show();
+					Toast.makeText(c, "WARNING: " + getWarningMessage().get(), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

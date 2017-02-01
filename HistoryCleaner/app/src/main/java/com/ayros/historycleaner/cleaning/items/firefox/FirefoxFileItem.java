@@ -2,7 +2,6 @@ package com.ayros.historycleaner.cleaning.items.firefox;
 
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItemStub;
-import com.ayros.historycleaner.cleaning.SimpleFileItem;
 import com.ayros.historycleaner.helpers.Logger;
 import com.ayros.historycleaner.helpers.RootHelper;
 

@@ -32,7 +32,7 @@ import android.widget.Toast;
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.R;
 import com.ayros.historycleaner.cleaning.CategoryList;
-import com.ayros.historycleaner.cleaning.CleanItemStub;
+import com.ayros.historycleaner.cleaning.CleanItem;
 import com.ayros.historycleaner.cleaning.CleanListener;
 import com.ayros.historycleaner.cleaning.Cleaner;
 import com.ayros.historycleaner.cleaning.Cleaner.CleanResults;
@@ -361,7 +361,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		{
 			int itemId = item.getItemId();
 
-			CleanItemStub ci = catList.getItemByUniqueId(itemId);
+			CleanItem ci = catList.getItemByUniqueId(itemId);
 			if (ci != null)
 			{
 				Globals.itemDataView = ci;
@@ -389,7 +389,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		List<CleanItemStub> items;
+		List<CleanItem> items;
 		switch (item.getItemId())
 		{
 			case R.id.clean_menu_save_as_profile:
@@ -398,7 +398,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 			case R.id.clean_menu_select_all:
 				items = catList.getAllItems(false);
-				for (CleanItemStub ci : items)
+				for (CleanItem ci : items)
 				{
 					// Only check item if there is no warning message (don't accidently clean something sensitive)
 					if (!ci.getWarningMessage().isPresent())
@@ -410,7 +410,7 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 			case R.id.clean_menu_select_none:
 				items = catList.getAllItems(false);
-				for (CleanItemStub ci : items)
+				for (CleanItem ci : items)
 				{
 					ci.setChecked(false);
 				}

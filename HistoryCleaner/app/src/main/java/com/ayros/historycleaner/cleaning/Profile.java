@@ -82,7 +82,7 @@ public class Profile
 		return new Profile(pName, pItems);
 	}
 
-	public boolean isSelected(CleanItemStub item)
+	public boolean isSelected(CleanItem item)
 	{
 		return selectedItems.contains(item.getUniqueName());
 	}

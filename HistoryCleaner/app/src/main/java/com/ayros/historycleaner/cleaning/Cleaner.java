@@ -76,11 +76,11 @@ public class Cleaner
 	
 	public class CleanProgressEvent
 	{
-		public CleanItemStub item = null;
+		public CleanItem item = null;
 		public int itemIndex = 0;
 		public int totalItems = 0;
 		
-		public CleanProgressEvent(CleanItemStub item, int itemIndex, int totalItems)
+		public CleanProgressEvent(CleanItem item, int itemIndex, int totalItems)
 		{
 			this.item = item;
 			this.itemIndex = itemIndex;
@@ -88,9 +88,9 @@ public class Cleaner
 		}
 	}
 	
-	private List<CleanItemStub> cleanList;
+	private List<CleanItem> cleanList;
 
-	public Cleaner(List<CleanItemStub> itemList)
+	public Cleaner(List<CleanItem> itemList)
 	{
 		cleanList = new ArrayList<>(itemList);
 	}
@@ -117,7 +117,7 @@ public class Cleaner
 				{
 					Logger.errorST("Root shell isn't started, cannot clean items");
 					
-					for (CleanItemStub item : cleanList)
+					for (CleanItem item : cleanList)
 					{
 						results.addFailure(item, new RootDeniedException("Root shell not started"));
 					}
@@ -127,7 +127,7 @@ public class Cleaner
 				{
 					for (int i = 0; i < cleanList.size(); i++)
 					{
-						final CleanItemStub item = cleanList.get(i);
+						final CleanItem item = cleanList.get(i);
 						
 						Logger.debug("About to clean item: " + item.getUniqueName());
 
@@ -199,7 +199,7 @@ public class Cleaner
 		{
 			Logger.errorST("Root shell isn't started, cannot clean items");
 			
-			for (CleanItemStub item : cleanList)
+			for (CleanItem item : cleanList)
 			{
 				results.addFailure(item, new RootDeniedException("Root shell not running"));
 			}
@@ -208,7 +208,7 @@ public class Cleaner
 		{
 			for (int i = 0; i < cleanList.size(); i++)
 			{
-				CleanItemStub item = cleanList.get(i);
+				CleanItem item = cleanList.get(i);
 				
 				if (cl.isPresent())
 				{
@@ -240,7 +240,7 @@ public class Cleaner
 
 	public boolean isRootRequired()
 	{
-		for (CleanItemStub item : cleanList)
+		for (CleanItem item : cleanList)
 		{
 			if (item.isRootRequired())
 			{

@@ -13,7 +13,7 @@ import com.ayros.historycleaner.R;
 public class Category
 {
 	private String name;
-	private List<CleanItemStub> items = new ArrayList<CleanItemStub>();
+	private List<CleanItem> items = new ArrayList<>();
 	private ViewGroup titleView = null;
 	
 	public Category(String name)
@@ -26,12 +26,12 @@ public class Category
 		return name;
 	}
 	
-	public List<CleanItemStub> getItems()
+	public List<CleanItem> getItems()
 	{
 		return items;
 	}
 	
-	public void addItem(CleanItemStub item)
+	public void addItem(CleanItem item)
 	{
 		items.add(item);
 	}

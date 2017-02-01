@@ -2,7 +2,9 @@ package com.ayros.historycleaner.ui;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,10 +13,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -40,6 +45,8 @@ import com.ayros.historycleaner.cleaning.Profile;
 import com.ayros.historycleaner.cleaning.ProfileList;
 import com.ayros.historycleaner.helpers.Logger;
 import com.google.common.base.Optional;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.stericson.RootTools.RootTools;
 
 public class CleanFragment extends Fragment implements OnClickListener, OnProfileUpdated
@@ -127,8 +134,23 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 		catList.loadProfile(ProfileList.getDefault());
 		catList.registerContextMenu(this);
 
-		Button cleanButton = (Button)getView().findViewById(R.id.clean_btnClear);
+		Button cleanButton = (Button) getView().findViewById(R.id.clean_btnClear);
 		cleanButton.setOnClickListener(this);
+
+		boolean showedNotice = false;
+		for (String permission : catList.getAllRequiredPermissions(false))
+		{
+			if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
+				if (!showedNotice)
+				{
+					Toast.makeText(getContext(), "Requesting permissions...", Toast.LENGTH_SHORT).show();
+					showedNotice = true;
+				}
+				ActivityCompat.requestPermissions(getActivity(),
+						new String[]{permission},
+						1);
+			}
+		}
 
 		// Context is needed in Logger class
 		if (Globals.getContext() == null)

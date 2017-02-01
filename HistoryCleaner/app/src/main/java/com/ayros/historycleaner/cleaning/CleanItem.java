@@ -9,6 +9,7 @@ import com.google.common.base.Optional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 public interface CleanItem
 {
@@ -31,6 +32,8 @@ public interface CleanItem
     ViewGroup getView();
 
     List<String[]> getSavedData() throws IOException, UnsupportedOperationException;
+
+    Set<String> getRequiredPermissions();
 
     boolean isApplicable();
 

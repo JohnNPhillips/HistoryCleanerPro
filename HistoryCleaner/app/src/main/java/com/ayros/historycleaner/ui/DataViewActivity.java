@@ -66,7 +66,7 @@ public class DataViewActivity extends Activity
 			displayMessageInTable("Viewing data is not supported for this item.");
 			return;
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			Logger.errorST("Couldn't get saved item for item " + Globals.itemDataView.getUniqueName(), e);
 			String emailHref = getMailToHref(
@@ -116,7 +116,7 @@ public class DataViewActivity extends Activity
 	private void appendCell(StringBuilder html, String data, boolean heading, boolean even)
 	{
 		String extra = (even && !heading) ? " class='evenRow'" : "";
-
+		data = data != null ? data : "";
 		html.append((heading ? "<th" + extra + ">" : "<td nowrap" + extra + ">") + TextUtils.htmlEncode(data) + (heading ? "</th>" : "</td>"));
 	}
 

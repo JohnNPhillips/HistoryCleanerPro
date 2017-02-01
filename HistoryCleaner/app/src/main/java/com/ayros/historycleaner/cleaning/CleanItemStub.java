@@ -1,7 +1,9 @@
 package com.ayros.historycleaner.cleaning;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.ActivityManager;
 import android.app.VoiceInteractor;
@@ -76,6 +78,12 @@ public abstract class CleanItemStub implements CleanItem
 	public List<String[]> getSavedData() throws IOException, UnsupportedOperationException
 	{
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Set<String> getRequiredPermissions()
+	{
+		return new HashSet<>();
 	}
 
 	public boolean isApplicable()

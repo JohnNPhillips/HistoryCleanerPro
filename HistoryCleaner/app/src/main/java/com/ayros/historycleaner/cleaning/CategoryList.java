@@ -2,7 +2,9 @@ package com.ayros.historycleaner.cleaning;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import android.os.Build;
@@ -896,6 +898,17 @@ public class CategoryList
 		}
 		
 		return items;
+	}
+
+	public Set<String> getAllRequiredPermissions(boolean enabledOnly)
+	{
+		Set<String> permissions = new HashSet<>();
+		for (CleanItem item : getAllItems(enabledOnly))
+		{
+			permissions.addAll(item.getRequiredPermissions());
+		}
+
+		return permissions;
 	}
 
 	public void loadProfile(Profile p)

@@ -29,6 +29,7 @@ public abstract class CleanItemStub implements CleanItem
 	protected final Category parentCat;
 	protected ViewGroup itemView = null;
 	protected CheckBox itemEnabled = null;
+	private volatile boolean disableWarning = false;
 
 	public CleanItemStub(Category parent)
 	{
@@ -146,7 +147,9 @@ public abstract class CleanItemStub implements CleanItem
 		// setEnabled(checked) not working?
 		if (checked != itemEnabled.isChecked())
 		{
+			disableWarning = true;
 			itemEnabled.toggle();
+			disableWarning = false;
 		}
 	}
 
@@ -189,7 +192,7 @@ public abstract class CleanItemStub implements CleanItem
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 			{
-				if (isChecked && getWarningMessage().isPresent())
+				if (isChecked && !disableWarning && getWarningMessage().isPresent())
 				{
 					new AlertDialog.Builder(c)
 							.setTitle("Warning")

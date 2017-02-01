@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.VoiceInteractor;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -190,7 +191,11 @@ public abstract class CleanItemStub implements CleanItem
 			{
 				if (isChecked && getWarningMessage().isPresent())
 				{
-					Toast.makeText(c, "WARNING: " + getWarningMessage().get(), Toast.LENGTH_LONG).show();
+					new AlertDialog.Builder(c)
+							.setTitle("Warning")
+							.setMessage(getWarningMessage().get())
+							.setPositiveButton(android.R.string.ok, null)
+							.show();
 				}
 			}
 		});

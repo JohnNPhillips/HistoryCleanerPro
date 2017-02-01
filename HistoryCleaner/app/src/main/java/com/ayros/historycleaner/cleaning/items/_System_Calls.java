@@ -1,17 +1,25 @@
 package com.ayros.historycleaner.cleaning.items;
 
+import android.Manifest;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.provider.CallLog;
 
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.cleaning.Category;
 import com.ayros.historycleaner.cleaning.CleanItemStub;
+import com.ayros.historycleaner.helpers.Helper;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 public class _System_Calls extends CleanItemStub
 {
-	String display;
-	int type;
+	private final String display;
+	private final int type;
 
 	public _System_Calls(Category parent, String display, int type)
 	{
@@ -53,6 +61,28 @@ public class _System_Calls extends CleanItemStub
 	}
 
 	@Override
+	public List<String[]> getSavedData() throws IOException
+	{
+		Cursor c;
+		try
+		{
+			String whereClause = "TYPE='" + type + "'";
+			String[] columns = { CallLog.Calls.DATE, CallLog.Calls.NUMBER, CallLog.Calls.CACHED_NAME };
+			c = Globals.getContext().getContentResolver().query(android.provider.CallLog.Calls.CONTENT_URI,
+					columns,
+					whereClause,
+					null,
+					null);
+		}
+		catch (SecurityException e)
+		{
+			throw new IOException(e);
+		}
+
+		return Helper.cursorToDataView(c, ImmutableSet.of(0));
+	}
+
+	@Override
 	public void clean() throws IOException
 	{
 		String whereClause = "TYPE='" + type + "'";
@@ -64,5 +94,11 @@ public class _System_Calls extends CleanItemStub
 		{
 			throw new IOException("Couldn't clear call history", e);
 		}
+	}
+
+	@Override
+	public Set<String> getRequiredPermissions()
+	{
+		return ImmutableSet.of(Manifest.permission.READ_CALL_LOG, Manifest.permission.WRITE_CALL_LOG);
 	}
 }

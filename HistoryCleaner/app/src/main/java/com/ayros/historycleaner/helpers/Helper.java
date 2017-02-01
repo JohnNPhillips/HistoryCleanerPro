@@ -3,15 +3,20 @@ package com.ayros.historycleaner.helpers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import android.content.pm.PackageInfo;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 
 import com.ayros.historycleaner.Globals;
 import com.ayros.historycleaner.R;
@@ -70,7 +75,7 @@ public class Helper
 
 		for (int i = 0; i < len; i++)
 		{
-			out += charset.charAt((int)(Math.random() * charset.length()));
+			out += charset.charAt((int) (Math.random() * charset.length()));
 		}
 
 		return out;
@@ -136,5 +141,41 @@ public class Helper
 			Logger.errorST("Could not read file contents: " + filePath, e);
 			return null;
 		}
+	}
+
+	public static List<String[]> cursorToDataView(Cursor c, @Nullable Set<Integer> dateColumns)
+	{
+		List<String[]> rows = new ArrayList<>();
+		String[] headers = new String[c.getColumnCount()];
+		for (int i = 0; i < headers.length; i++)
+		{
+			headers[i] = c.getColumnName(i);
+		}
+		rows.add(headers);
+
+		if (c.moveToFirst())
+		{
+			while (!c.isAfterLast())
+			{
+				String[] row = new String[c.getColumnCount()];
+				for (int i = 0; i < row.length; i++)
+				{
+					row[i] = c.getString(i);
+					try
+					{
+						if (dateColumns.contains(i))
+						{
+							row[i] = new Date(Long.parseLong(row[i])).toString();
+						}
+					}
+					catch (Exception e) {}
+				}
+				rows.add(row);
+				c.moveToNext();
+			}
+		}
+		c.close();
+
+		return rows;
 	}
 }

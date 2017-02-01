@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -42,6 +43,7 @@ public class Cleaner
 		public String getErrorReport()
 		{
 			StringBuilder sb = new StringBuilder();
+			sb.append("Android Version: " + Build.VERSION.RELEASE + "\n\n");
 			for (Map.Entry<CleanItem, Exception> entry : failures.entrySet())
 			{
 				sb.append("Item Name: " + entry.getKey().getUniqueName() + "\n");

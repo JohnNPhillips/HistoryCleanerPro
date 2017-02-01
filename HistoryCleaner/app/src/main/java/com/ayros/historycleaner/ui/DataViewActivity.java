@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import com.ayros.historycleaner.helpers.Logger;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootShell.exceptions.RootDeniedException;
 import com.stericson.RootShell.execution.Shell;
+import com.twofortyfouram.spackle.AndroidSdkVersion;
 
 public class DataViewActivity extends Activity
 {
@@ -71,7 +73,8 @@ public class DataViewActivity extends Activity
 			Logger.errorST("Couldn't get saved item for item " + Globals.itemDataView.getUniqueName(), e);
 			String emailHref = getMailToHref(
 					"Error getting data for: " + Globals.itemDataView.getUniqueName(),
-					"Stack Trace: " + Log.getStackTraceString(e));
+					"Android Version: " + Build.VERSION.RELEASE + "\n" +
+							"Stack Trace: " + Log.getStackTraceString(e));
 			displayHtmlMessage(String.format("Couldn't get saved data for %s. " +
 					"Most likely the app was updated in a way that changed how they store their data. " +
 					"If you send me an email at ayros@email.com, I should be able to fix it. " +

@@ -159,4 +159,19 @@ public class RootHelper
 			throw new IOException("Failed to delete file or directory " + path);
 		}
 	}
+
+	public static long getDirectorySizeKB(String dir)
+	{
+		try
+		{
+			String output = RootHelper.runAndWait(String.format("du -k '%s'| tail -n 1", dir));
+			String kb = output.split("\\s")[0];
+			return Long.parseLong(kb);
+		}
+		catch (Exception e)
+		{
+			// This method is only used for data viewing, just fail silently on any exceptions
+			return -1;
+		}
+	}
 }

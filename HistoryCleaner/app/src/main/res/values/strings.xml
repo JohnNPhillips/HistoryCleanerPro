@@ -20,6 +20,11 @@
     <!--  -->
     <string name="clean_clear_items">Clear Items</string>
     <string name="clean_fail_dialog_send">Send Error Report</string>
+    <!-- -->
+    <string name="clean_deps_missing_title">Missing Dependencies</string>
+    <string name="clean_deps_missing">Your phone doesn\'t appear to have the following installed:</string>
+    <string name="clean_deps_fix_busybox">- To install busybox, we recommend using &lt;a href="https://play.google.com/store/apps/details?id=stericson.busybox"&gt;Busybox by Stericson&lt;/a&gt;</string>
+    <string name="clean_deps_fix_sqlite">- To install sqlite, we recommend using &lt;a href="https://play.google.com/store/apps/details?id=com.kanolato.sqlite"&gt;Sqlite installer for root&lt;/a&gt;</string>
     <!--  -->
     <string name="profile_none_text">You don\'t have any profiles created currently. To create one, select items on the \'Clean\' tab, and press \'Save as Profile\' in the options menu.</string>
     <string name="profile_list_row_load">Load</string>

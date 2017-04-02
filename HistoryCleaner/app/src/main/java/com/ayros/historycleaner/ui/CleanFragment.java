@@ -1,11 +1,13 @@
 package com.ayros.historycleaner.ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -20,6 +22,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -32,6 +36,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayros.historycleaner.Globals;
@@ -44,6 +49,8 @@ import com.ayros.historycleaner.cleaning.Cleaner.CleanResults;
 import com.ayros.historycleaner.cleaning.Profile;
 import com.ayros.historycleaner.cleaning.ProfileList;
 import com.ayros.historycleaner.helpers.Logger;
+import com.ayros.historycleaner.helpers.RootHelper;
+import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
@@ -266,6 +273,11 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 				}
 				return;
 			}
+
+			if (!ensureRequiredBinaries())
+			{
+				return;
+			}
 		}
 
 		final ProgressDialog pd = new ProgressDialog(getActivity());
@@ -350,6 +362,51 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 				}
 			}
 		}));
+	}
+
+	private boolean ensureRequiredBinaries()
+	{
+		boolean hasSqlite = RootHelper.hasSqlite();
+		boolean hasBox = RootHelper.hasBusybox() || RootHelper.hasToolbox();
+		List<String> missingUtilities = new ArrayList<>();
+		if (!hasSqlite)
+		{
+			missingUtilities.add("sqlite");
+		}
+		if (!hasBox)
+		{
+			missingUtilities.add("busybox");
+		}
+		if (!missingUtilities.isEmpty())
+		{
+			StringBuilder alertMessage = new StringBuilder();
+			alertMessage.append(getResources().getString(R.string.clean_deps_missing) + " ");
+			alertMessage.append(Joiner.on(", ").join(missingUtilities) + "<br />\n<br />\n");
+			if (!hasSqlite)
+			{
+				alertMessage.append(getResources().getString(R.string.clean_deps_fix_sqlite) + "<br />\n");
+			}
+			if (!hasBox)
+			{
+				alertMessage.append(getResources().getString(R.string.clean_deps_fix_busybox) + "<br / >\n");
+			}
+
+			TextView textView = new TextView(getContext());
+			textView.setMovementMethod(LinkMovementMethod.getInstance());
+			textView.setText(Html.fromHtml(alertMessage.toString()));
+			int px = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+			int py = getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
+			textView.setPadding(px, py, px, py);
+
+			new AlertDialog.Builder(getContext())
+					.setTitle(R.string.clean_deps_missing_title)
+					.setView(textView)
+					.setPositiveButton(android.R.string.ok, null)
+					.show();
+			return false;
+		}
+
+		return true;
 	}
 
 	public static String getTip()

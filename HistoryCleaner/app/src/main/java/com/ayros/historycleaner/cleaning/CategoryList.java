@@ -392,7 +392,8 @@ public class CategoryList
 			}
 		));
 		cat.addItem(new FirefoxFileItem(cat, "Local Storage", FirefoxUtils.FIREFOX_PACKAGE, "/webappsstore.sqlite*"));
-		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_PACKAGE, "/sessionstore.js"));
+		// sessionstore.js and sessionstore.bak
+		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_PACKAGE, "/sessionstore.*"));
 		cat.addItem(new FirefoxDatabaseItem
 		(
 			cat, "Search Widget", FirefoxUtils.FIREFOX_PACKAGE, "/browser.db",
@@ -442,7 +443,8 @@ public class CategoryList
 			}
 		));
 		cat.addItem(new FirefoxFileItem(cat, "Local Storage", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/webappsstore.sqlite*"));
-		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/sessionstore.js"));
+		// sessionstore.js and sessionstore.bak
+		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/sessionstore.*"));
 		cat.addItem(new FirefoxDatabaseItem
 		(
 			cat, "Search Widget", FirefoxUtils.FIREFOX_BETA_PACKAGE, "/browser.db",
@@ -492,7 +494,8 @@ public class CategoryList
 			}
 		));
 		cat.addItem(new FirefoxFileItem(cat, "Local Storage", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/webappsstore.sqlite*"));
-		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/sessionstore.js"));
+		// sessionstore.js and sessionstore.bak
+		cat.addItem(new FirefoxFileItem(cat, "Open Tabs", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/sessionstore.*"));
 		cat.addItem(new FirefoxDatabaseItem
 		(
 			cat, "Search Widget", FirefoxUtils.FIREFOX_NIGHTLY_PACKAGE, "/browser.db",

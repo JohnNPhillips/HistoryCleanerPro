@@ -12,6 +12,7 @@ import com.stericson.RootShell.exceptions.RootDeniedException;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootShell.execution.Command;
 import com.stericson.RootShell.execution.Shell;
+import com.stericson.RootTools.internal.RootToolsInternalMethods;
 
 public class RootHelper
 {
@@ -173,5 +174,20 @@ public class RootHelper
 			// This method is only used for data viewing, just fail silently on any exceptions
 			return -1;
 		}
+	}
+
+	public static boolean hasToolbox()
+	{
+		return RootTools.findBinary("toolbox").size() > 0;
+	}
+
+	public static boolean hasBusybox()
+	{
+		return RootTools.isBusyboxAvailable();
+	}
+
+	public static boolean hasSqlite()
+	{
+		return RootTools.findBinary("sqlite3").size() > 0;
 	}
 }

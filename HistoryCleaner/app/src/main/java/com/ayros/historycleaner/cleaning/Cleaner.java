@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.ayros.historycleaner.UIRunner;
 import com.ayros.historycleaner.helpers.Logger;
+import com.ayros.historycleaner.helpers.RootHelper;
 import com.google.common.base.Optional;
 import com.stericson.RootShell.exceptions.RootDeniedException;
 import com.stericson.RootTools.RootTools;
@@ -43,7 +44,12 @@ public class Cleaner
 		public String getErrorReport()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.append("Android Version: " + Build.VERSION.RELEASE + "\n\n");
+			sb.append("Android Version: " + Build.VERSION.RELEASE + "\n");
+			sb.append("Has Busybox: " + RootHelper.hasBusybox() + "\n");
+			sb.append("Has Toolbox: " + RootHelper.hasToolbox() + "\n");
+			sb.append("Has sqlite: " + RootHelper.hasSqlite() + "\n");
+
+			sb.append("\n");
 			for (Map.Entry<CleanItem, Exception> entry : failures.entrySet())
 			{
 				sb.append("Item Name: " + entry.getKey().getUniqueName() + "\n");

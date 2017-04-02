@@ -45,6 +45,7 @@ public class Cleaner
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append("Android Version: " + Build.VERSION.RELEASE + "\n");
+			sb.append("Build: " + Build.DISPLAY + "\n");
 			sb.append("Has Busybox: " + RootHelper.hasBusybox() + "\n");
 			sb.append("Has Toolbox: " + RootHelper.hasToolbox() + "\n");
 			sb.append("Has sqlite: " + RootHelper.hasSqlite() + "\n");
@@ -59,6 +60,7 @@ public class Cleaner
 
 			return sb.toString();
 		}
+
 		@Override
 		public String toString()
 		{

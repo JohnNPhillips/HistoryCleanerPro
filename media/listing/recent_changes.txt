@@ -1,3 +1,7 @@
+4.1.2
+- Fix "Firefox:Open Tabs"
+- Show warning if missing app dependencies (busybox + sqlite binary)
+
 4.1.1
 - Fix clearing system cache on Android 6.0+
 - Fix outgoing/incoming/missed calls on Android 6.0+
@@ -8,8 +12,5 @@
 - Added ability to easily submit error reports from within the app
 - Fix Adobe Reader:Recent Files
 - Lots of under-the-hood changes
-
-4.0.1
-- Temporarily removed Android 6.0 (Marshmallow) support due to SELinux problems
 
 Email ayros@email.com if you have any issues, I am here to help.

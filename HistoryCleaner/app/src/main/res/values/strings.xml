@@ -23,6 +23,7 @@
     <!-- -->
     <string name="clean_deps_missing_title">Missing Dependencies</string>
     <string name="clean_deps_missing">Your phone doesn\'t appear to have the following installed:</string>
+    <string name="clean_deps_missing_ignore">Note: You can disable this check in the app settings, but any items that require the missing dependencies will fail.</string>
     <string name="clean_deps_fix_busybox">- To install busybox, we recommend using &lt;a href="https://play.google.com/store/apps/details?id=stericson.busybox"&gt;Busybox by Stericson&lt;/a&gt;</string>
     <string name="clean_deps_fix_sqlite">- To install sqlite, we recommend using &lt;a href="https://play.google.com/store/apps/details?id=com.kanolato.sqlite"&gt;Sqlite installer for root&lt;/a&gt;</string>
     <!--  -->
@@ -45,5 +46,9 @@
     <string name="pref_showTips_title">Show tip at startup</string>
     <string name="pref_showTips_desc">When enabled, the app will show usage tips when opened.</string>
     <string name="pref_showTips_key">showStartupTip</string>
+    <!-- -->
+    <string name="pref_ignoreDeps_title">Ignore dependencies</string>
+    <string name="pref_ignoreDeps_desc">Don\'t check for dependencies (sqlite, busybox, etc) before clearing items. Note: This will cause items that require any missing dependencies to fail.</string>
+    <string name="pref_ignoreDeps_key">ignoreDependencies</string>
 
 </resources>

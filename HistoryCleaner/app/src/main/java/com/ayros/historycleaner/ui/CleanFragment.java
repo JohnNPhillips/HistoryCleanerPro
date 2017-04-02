@@ -366,6 +366,13 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 
 	private boolean ensureRequiredBinaries()
 	{
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+		if (prefs.getBoolean(getResources().getString(R.string.pref_ignoreDeps_key), false))
+		{
+			Logger.debug("Skipping dependency check");
+			return true;
+		}
+
 		boolean hasSqlite = RootHelper.hasSqlite();
 		boolean hasBox = RootHelper.hasBusybox() || RootHelper.hasToolbox();
 		List<String> missingUtilities = new ArrayList<>();
@@ -390,6 +397,9 @@ public class CleanFragment extends Fragment implements OnClickListener, OnProfil
 			{
 				alertMessage.append(getResources().getString(R.string.clean_deps_fix_busybox) + "<br / >\n");
 			}
+
+			alertMessage.append("<br />\n");
+			alertMessage.append(getResources().getString(R.string.clean_deps_missing_ignore));
 
 			TextView textView = new TextView(getContext());
 			textView.setMovementMethod(LinkMovementMethod.getInstance());

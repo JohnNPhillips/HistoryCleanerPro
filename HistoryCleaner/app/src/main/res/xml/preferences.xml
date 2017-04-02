@@ -4,4 +4,8 @@
                         android:defaultValue="true"
                         android:summary="@string/pref_showTips_desc"
                         android:key="@string/pref_showTips_key" />
+    <CheckBoxPreference android:title="@string/pref_ignoreDeps_title"
+                        android:defaultValue="false"
+                        android:summary="@string/pref_ignoreDeps_desc"
+                        android:key="@string/pref_ignoreDeps_key" />
 </PreferenceScreen>

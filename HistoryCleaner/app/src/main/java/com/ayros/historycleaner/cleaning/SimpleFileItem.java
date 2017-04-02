@@ -44,7 +44,7 @@ public class SimpleFileItem extends CleanItemStub
 	@Override
 	public List<String[]> getSavedData()
 	{
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
